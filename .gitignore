@@ -1,0 +1,7 @@
+virtualenv_python
+node_modules
+__pycache__
+.DS_Store
+*.log
+.envrc
+flask_cache
