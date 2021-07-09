@@ -24,6 +24,8 @@ const templates = path.resolve(flask_app, "templates");
 // delete prior webpack assets in the public path's /assets/ before webpack starts processing
 del.sync([path.resolve(assets, "*.(js|br|css|gif|gz|svg|json|LICENSE|txt)")]);
 
+console.log("CONFIG", config);
+
 module.exports = (env, argv) => {
   const devMode = argv.mode !== "production";
   const environment = argv.mode;
@@ -76,6 +78,7 @@ module.exports = (env, argv) => {
                 "@babel/plugin-proposal-class-properties",
                 "@babel/plugin-syntax-dynamic-import",
                 "@babel/plugin-transform-template-literals",
+                "@babel/plugin-transform-runtime",
               ],
             },
           },
@@ -202,7 +205,8 @@ module.exports = (env, argv) => {
       }),
       new HtmlWebpackPlugin({
         hash: true,
-        inject: true,
+        inject: false,
+        template: "./src/assets.inc",
         filename: `${templates}/includes/assets.inc`,
         environment: environment,
         development: ifNotProduction(),

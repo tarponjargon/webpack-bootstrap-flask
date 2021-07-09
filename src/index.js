@@ -1,3 +1,4 @@
 import "./scss/style.scss";
+import bootstrap from "bootstrap";
 
-console.log("loaded");
+console.log("loaded", CFG);

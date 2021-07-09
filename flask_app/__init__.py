@@ -1,6 +1,8 @@
+import os
 from flask import Flask, render_template
 
 app = Flask(__name__, static_folder = 'assets')
+app.config.from_object("config." + "config." + os.environ["ENV"])
 
 @app.route("/")
 def home():
