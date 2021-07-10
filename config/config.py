@@ -3,7 +3,7 @@
 class Config(object):
   """ config vars common to all environments """
   STORE_EMAIL = "letspetpuppies@yahoo.com"
-  STORE_NAME = "Let's Pet Puppies"
+  STORE_NAME = "Let's Pet Puppies!"
   STORE_ADDRESS1 = "1234 Puppy St"
   STORE_CITY = "Puppytown"
   STORE_STATE = "PA"
