@@ -24,7 +24,7 @@ const templates = path.resolve(flask_app, "templates");
 // delete prior webpack assets in the public path's /assets/ before webpack starts processing
 del.sync([path.resolve(assets, "*.(js|br|css|gif|gz|svg|json|LICENSE|txt)")]);
 
-console.log("CONFIG", config);
+console.log(config);
 
 module.exports = (env, argv) => {
   const devMode = argv.mode !== "production";
