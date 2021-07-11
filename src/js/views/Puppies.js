@@ -1,9 +1,9 @@
-export default class Home {
+export default class Puppies {
   constructor() {}
 
   init = () => {
     return new Promise((resolve, reject) => {
-      resolve("Home controller loaded");
+      resolve("Puppies controller loaded");
     });
   };
 }

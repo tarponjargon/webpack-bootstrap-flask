@@ -1,0 +1,29 @@
+{% extends "base.html.j2" %}
+{% set title %}Puppies @ {{ config.STORE_NAME }}{% endset %}
+{% set page = 'puppies' %}
+{% block content %}
+
+<section class="masthead page-section bg-white mb-0" id="{{ page }}">
+    <div class="container">
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Puppies!</h2>
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <div class="row">
+          {% for puppy in puppies.animals %}
+          <div class="col-12 col-md-3 text-center">
+            {% if puppy.photos|length > 1 %}
+              <img src="{{ puppy.photos[0].medium }}" class="img-responsive" alt="{{ puppy.name }}" />
+            {% else %}
+              <img src="/assets/images/puppy.png" class="img-responsive" alt="No photo of {{ puppy.name }} available" />
+            {% endif %}
+            {{ puppy.name }}
+          </div>
+          {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

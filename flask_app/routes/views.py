@@ -6,10 +6,15 @@ views = Blueprint("views", __name__)
 
 @views.route("/")
 def home():
-    petfinder = PetFinder()
-    pets = petfinder.get_pets()
-    current_app.logger.warning(pets)
     return render_template("home.html.j2")
+
+
+@views.route("/puppies")
+def puppies():
+    petfinder = PetFinder()
+    puppies = petfinder.get_puppies()
+    current_app.logger.warning(puppies)
+    return render_template("puppies.html.j2", puppies=puppies)
 
 
 @views.route("/about")

@@ -3,7 +3,7 @@ export default class About {
 
   init = () => {
     return new Promise((resolve, reject) => {
-      resolve("About");
+      resolve("About controller loaded");
     });
   };
 }

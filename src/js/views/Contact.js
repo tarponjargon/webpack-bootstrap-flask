@@ -3,7 +3,7 @@ export default class Contact {
 
   init = () => {
     return new Promise((resolve, reject) => {
-      resolve("Contact");
+      resolve("Contact controller loaded");
     });
   };
 }
