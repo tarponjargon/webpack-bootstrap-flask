@@ -1,0 +1,6 @@
+{% macro render_dog_size(selected_value) -%}
+  <option value="small" {{ 'selected' if selected_value == 'small' }}>Small</option>
+  <option value="medium" {{ 'selected' if selected_value == 'medium' }}>Medium</option>
+  <option value="large" {{ 'selected' if selected_value == 'large' }}>Large</option>
+  <option value="xlarge" {{ 'selected' if selected_value == 'xlarge' }}>Extra Large</option>
+{%- endmacro %}

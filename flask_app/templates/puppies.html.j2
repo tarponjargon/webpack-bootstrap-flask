@@ -1,4 +1,8 @@
 {% extends "base.html.j2" %}
+{% from 'includes/paging_macro.html.j2' import render_paging %}
+{% from 'includes/breeds_macro.html.j2' import render_breeds %}
+{% from 'includes/states_macro.html.j2' import render_states %}
+{% from 'includes/dog_size_macro.html.j2' import render_dog_size %}
 {% set title %}Puppies @ {{ config.STORE_NAME }}{% endset %}
 {% set page = 'puppies' %}
 {% block content %}
@@ -39,33 +43,70 @@
         <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Puppies!</h2>
         <div class="divider-custom">
             <div class="divider-custom-line"></div>
-            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-icon"><i class="fas fa-paw"></i></div>
             <div class="divider-custom-line"></div>
         </div>
         <div class="row">
+          <div class="col-12 col-lg-3 mb-2 mb-lg-4">
+            <select class="form-select">
+              <option>Select State</option>
+              {{ render_states() }}
+            </select>
+          </div>
+          <div class="col-12 col-lg-3 mb-2 mb-lg-4">
+            <select class="form-select">
+              <option>Select Breed</option>
+              {{ render_breeds() }}
+            </select>
+          </div>
+          <div class="col-12 col-lg-3 mb-2 mb-lg-4">
+            <select class="form-select">
+              <option>Select Size</option>
+              {{ render_dog_size() }}
+            </select>
+          </div>
+          <div class="col-12 col-lg-3 mb-2 mb-lg-4 d-flex align-items-center justify-content-between justify-content-lg-end">
+            {{ render_paging(puppies.pagination) }}
+          </div>
+        </div>
+
+        <div class="row">
           {% for puppy in puppies.animals %}
+
             {% set thumb = "/assets/images/puppy.jpg" %}
             {% if puppy.photos|length > 1 %}
               {% set thumb = puppy.photos[0].medium %}
             {% endif %}
 
             <div class="col-12 col-md-6 col-lg-4 col-xl-3 text-center pb-5">
-
               <div class="card-box h-100 position-relative">
                 <div class="card-thumbnail">
-                    <img src="{{ thumb }}" class="img-fluid" alt="{{ puppy.name }}" />
+                  <img src="{{ thumb }}" class="img-fluid" alt="{{ puppy.name }}" />
                 </div>
-                <h3><a href="#" class="mt-4 text-danger">
-                  {{ puppy.name }} -
-                  {{puppy.contact.address.city}},
-                  {{puppy.contact.address.state}}</a></h3>
-                  <a href="#" class="btn btn-sm btn-primary read-more-btn" role="button">Read More <i class="fas fa-arrow-right"></i></a>
+                <h3>
+                  <a href="#" class="mt-4 text-danger">
+                    {{ puppy.name }} -
+                    {{puppy.contact.address.city}},
+                    {{puppy.contact.address.state}}
+                  </a>
+                </h3>
+                <a
+                  href="#"
+                  class="btn btn-sm btn-primary read-more-btn"
+                  role="button"
+                >Read More <i class="fas fa-arrow-right"></i>
+                </a>
               </div>
-
-
             </div>
 
           {% endfor %}
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-lg-9">&nbsp;</div>
+          <div class="col-12 col-lg-3 d-flex align-items-center justify-content-between justify-content-lg-end">
+            {{ render_paging(puppies.pagination) }}
+          </div>
         </div>
     </div>
 </section>

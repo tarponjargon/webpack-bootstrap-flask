@@ -1,0 +1,13 @@
+{% macro render_paging(pagination) -%}
+  {% if pagination.current_page == 1 %}
+    <i class="fas fa-chevron-circle-left fa-3x text-light me-5"></i>
+  {% else %}
+    <a href="#"><i class="fas fa-chevron-circle-left fa-3x me-5"></i></a>
+  {% endif %}
+
+  {% if pagination.current_page == pagination.total_pages %}
+    <i class="fas fa-chevron-circle-right fa-3x text-light"></i>
+  {% else %}
+    <a href="#"><i class="fas fa-chevron-circle-right fa-3x"></i></a>
+  {% endif %}
+{%- endmacro %}
