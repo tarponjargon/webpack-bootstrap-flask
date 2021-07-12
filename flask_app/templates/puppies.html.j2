@@ -3,6 +3,37 @@
 {% set page = 'puppies' %}
 {% block content %}
 
+<style>
+  .card-box {
+    border: 1px solid #ddd;
+    padding: 20px;
+    box-shadow: 0px 0px 10px 0px #c5c5c5;
+    border-radius: 10px;
+    min-height: 350px;
+  }
+  .card-box .card-thumbnail {
+      max-height: 200px;
+      overflow: hidden;
+      border-radius: 10px;
+      transition: 1s;
+  }
+  .card-box .card-thumbnail:hover {
+      transform: scale(1.2);
+  }
+  .card-box h3 a {
+      font-size: 20px;
+      text-decoration: none;
+  }
+  .read-more-btn {
+    position: absolute;
+    bottom: 20px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    width: 40%;
+  }
+</style>
+
 <section class="masthead page-section bg-white mb-0" id="{{ page }}">
     <div class="container">
         <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Puppies!</h2>
@@ -13,14 +44,27 @@
         </div>
         <div class="row">
           {% for puppy in puppies.animals %}
-          <div class="col-12 col-md-3 text-center">
+            {% set thumb = "/assets/images/puppy.jpg" %}
             {% if puppy.photos|length > 1 %}
-              <img src="{{ puppy.photos[0].medium }}" class="img-responsive" alt="{{ puppy.name }}" />
-            {% else %}
-              <img src="/assets/images/puppy.png" class="img-responsive" alt="No photo of {{ puppy.name }} available" />
+              {% set thumb = puppy.photos[0].medium %}
             {% endif %}
-            {{ puppy.name }}
-          </div>
+
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3 text-center pb-5">
+
+              <div class="card-box h-100 position-relative">
+                <div class="card-thumbnail">
+                    <img src="{{ thumb }}" class="img-fluid" alt="{{ puppy.name }}" />
+                </div>
+                <h3><a href="#" class="mt-4 text-danger">
+                  {{ puppy.name }} -
+                  {{puppy.contact.address.city}},
+                  {{puppy.contact.address.state}}</a></h3>
+                  <a href="#" class="btn btn-sm btn-primary read-more-btn" role="button">Read More <i class="fas fa-arrow-right"></i></a>
+              </div>
+
+
+            </div>
+
           {% endfor %}
         </div>
     </div>
