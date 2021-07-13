@@ -1,13 +1,13 @@
-{% macro render_paging(pagination) -%}
-  {% if pagination.current_page == 1 %}
-    <i class="fas fa-chevron-circle-left fa-3x text-light me-5"></i>
+{% macro render_paging(prev_url, next_url) -%}
+  {% if prev_url %}
+    <a href="{{ prev_url }}"><i class="fas fa-chevron-circle-left fa-3x me-5"></i></a>
   {% else %}
-    <a href="#"><i class="fas fa-chevron-circle-left fa-3x me-5"></i></a>
+    <i class="fas fa-chevron-circle-left fa-3x text-light me-5"></i>
   {% endif %}
 
-  {% if pagination.current_page == pagination.total_pages %}
-    <i class="fas fa-chevron-circle-right fa-3x text-light"></i>
+  {% if next_url %}
+    <a href="{{ next_url }}"><i class="fas fa-chevron-circle-right fa-3x"></i></a>
   {% else %}
-    <a href="#"><i class="fas fa-chevron-circle-right fa-3x"></i></a>
+    <i class="fas fa-chevron-circle-right fa-3x text-light"></i>
   {% endif %}
 {%- endmacro %}

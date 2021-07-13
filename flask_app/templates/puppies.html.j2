@@ -7,40 +7,9 @@
 {% set page = 'puppies' %}
 {% block content %}
 
-<style>
-  .card-box {
-    border: 1px solid #ddd;
-    padding: 20px;
-    box-shadow: 0px 0px 10px 0px #c5c5c5;
-    border-radius: 10px;
-    min-height: 350px;
-  }
-  .card-box .card-thumbnail {
-      max-height: 200px;
-      overflow: hidden;
-      border-radius: 10px;
-      transition: 1s;
-  }
-  .card-box .card-thumbnail:hover {
-      transform: scale(1.2);
-  }
-  .card-box h3 a {
-      font-size: 20px;
-      text-decoration: none;
-  }
-  .read-more-btn {
-    position: absolute;
-    bottom: 20px;
-    margin: 0 auto;
-    left: 0;
-    right: 0;
-    width: 40%;
-  }
-</style>
-
 <section class="masthead page-section bg-white mb-0" id="{{ page }}">
     <div class="container">
-        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Puppies!</h2>
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Get Puppies</h2>
         <div class="divider-custom">
             <div class="divider-custom-line"></div>
             <div class="divider-custom-icon"><i class="fas fa-paw"></i></div>
@@ -50,23 +19,23 @@
           <div class="col-12 col-lg-3 mb-2 mb-lg-4">
             <select class="form-select">
               <option>Select State</option>
-              {{ render_states() }}
+              {{ render_states(params.location) }}
             </select>
           </div>
           <div class="col-12 col-lg-3 mb-2 mb-lg-4">
             <select class="form-select">
               <option>Select Breed</option>
-              {{ render_breeds() }}
+              {{ render_breeds(params.breed) }}
             </select>
           </div>
           <div class="col-12 col-lg-3 mb-2 mb-lg-4">
             <select class="form-select">
               <option>Select Size</option>
-              {{ render_dog_size() }}
+              {{ render_dog_size(params.size) }}
             </select>
           </div>
           <div class="col-12 col-lg-3 mb-2 mb-lg-4 d-flex align-items-center justify-content-between justify-content-lg-end">
-            {{ render_paging(puppies.pagination) }}
+            {{ render_paging(prev_url, next_url) }}
           </div>
         </div>
 
@@ -105,7 +74,7 @@
         <div class="row">
           <div class="col-12 col-lg-9">&nbsp;</div>
           <div class="col-12 col-lg-3 d-flex align-items-center justify-content-between justify-content-lg-end">
-            {{ render_paging(puppies.pagination) }}
+            {{ render_paging(prev_url, next_url) }}
           </div>
         </div>
     </div>
