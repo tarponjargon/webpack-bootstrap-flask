@@ -33,9 +33,7 @@ def puppies():
     except KeyError:
         pass
 
-    return render_template(
-        "puppies.html.j2", puppies=puppies, params=params, prev_url=prev_url, next_url=next_url
-    )
+    return render_template("puppies.html.j2", puppies=puppies, params=params, prev_url=prev_url, next_url=next_url)
 
 
 @views.route("/about")
