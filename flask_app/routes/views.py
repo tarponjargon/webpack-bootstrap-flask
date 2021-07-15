@@ -1,8 +1,17 @@
+from urllib.parse import urlencode
 from flask import Blueprint, render_template, current_app, request
 from flask_app.petfinder import PetFinder
-from flask_app.helpers import safe_param, get_qs
+from flask_app.helpers import safe_param, get_qs, make_qs
 
 views = Blueprint("views", __name__)
+
+
+@views.context_processor
+def template_utils():
+    def qs(params, exclude=None):
+        return make_qs(params, exclude)
+
+    return dict(qs=qs)
 
 
 @views.route("/")

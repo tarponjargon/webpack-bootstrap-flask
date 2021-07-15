@@ -1,4 +1,4 @@
-from urllib.parse import urlparse
+from urllib.parse import urlparse, urlencode
 from flask import render_template, request, escape
 
 
@@ -23,3 +23,8 @@ def safe_param(key):
 def get_qs(url):
     parsed_url = urlparse(url)
     return parsed_url.query
+
+
+def make_qs(params, exclude=None):
+    clean_dict = {k: v for k, v in params.items() if k != exclude and v is not None}
+    return urlencode(clean_dict)

@@ -3,6 +3,7 @@
 {% from 'includes/breeds_macro.html.j2' import render_breeds %}
 {% from 'includes/states_macro.html.j2' import render_states %}
 {% from 'includes/dog_size_macro.html.j2' import render_dog_size %}
+{% from 'includes/resetfilter_macro.html.j2' import reset_filter with context %}
 {% set title %}Puppies @ {{ config.STORE_NAME }}{% endset %}
 {% set page = 'puppies' %}
 {% block content %}
@@ -16,17 +17,20 @@
             <div class="divider-custom-line"></div>
         </div>
         <div class="row">
-          <div class="col-12 col-lg-3 mb-2 mb-lg-4">
+          <div class="col-12 col-lg-3 mb-2 mb-lg-4 d-flex justify-content-start align-items-center">
             <select
-              class="form-select"
+              class="form-select w-auto flex-grow-1"
               name="location"
               data-js="param-change"
             >
               <option value="">Select State</option>
               {{ render_states(params.location) }}
             </select>
+            {% if params.location %}
+              {{ reset_filter('location')}}
+            {% endif %}
           </div>
-          <div class="col-12 col-lg-3 mb-2 mb-lg-4">
+          <div class="col-12 col-lg-3 mb-2 mb-lg-4 d-flex justify-content-start align-items-center">
             <select
               class="form-select"
               name="breed"
@@ -35,23 +39,37 @@
               <option value="">Select Breed</option>
               {{ render_breeds(params.breed) }}
             </select>
+            {% if params.breed %}
+              {{ reset_filter('breed')}}
+            {% endif %}
           </div>
-          <div class="col-12 col-lg-3 mb-2 mb-lg-4">
+          <div class="col-12 col-lg-3 mb-2 mb-lg-4 d-flex justify-content-start align-items-center">
             <select
-              class="form-select"
+              class="form-select w-auto flex-grow-1"
               name="size"
               data-js="param-change"
             >
               <option value="">Select Size</option>
               {{ render_dog_size(params.size) }}
             </select>
+            {% if params.size %}
+              {{ reset_filter('size')}}
+            {% endif %}
           </div>
           <div class="col-12 col-lg-3 mb-2 mb-lg-4 d-flex align-items-center justify-content-between justify-content-lg-end">
             {{ render_paging(prev_url, next_url) }}
           </div>
+
         </div>
 
         <div class="row">
+          {% if puppies.animals | length == 0 %}
+            <h2>No puppies found! <i class="fas fa-sad-tear fw-normal"></i></h2>
+            <p>
+              <a href="{{ url_for(request.endpoint) }}">Remove all filters</a> to see more puppies.
+            </p>
+          {% endif %}
+
           {% for puppy in puppies.animals %}
 
             {% set thumb = "/assets/images/puppy.jpg" %}

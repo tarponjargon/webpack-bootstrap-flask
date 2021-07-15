@@ -1,0 +1,7 @@
+{% macro reset_filter(keyName) -%}
+  <a
+  href="{{ url_for(request.endpoint) }}?{{ qs(params, keyName) }}"
+  class="ms-2 text-danger"
+  title="Remove this filter"
+  ><i class="fas fa-times-circle"></i></a>
+{%- endmacro %}
