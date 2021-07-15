@@ -28,3 +28,19 @@
 	right: 0;
 	width: 40%;
 }
+
+.favorite {
+  position: absolute;
+  bottom: 16px;
+  left: 7%;
+  transition: 0.5s;
+  .fas {
+    font-weight: 400;
+  }
+  &:hover {
+    transform: scale(1.2);
+    .fas {
+      font-weight: 900;
+    }
+  }
+}

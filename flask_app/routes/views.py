@@ -31,6 +31,8 @@ def puppies():
     }
     petfinder = PetFinder()
     puppies = petfinder.get_puppies(params)
+
+    # modify petfinder's pagination links rather than hand-rolling
     prev_url = None
     next_url = None
     try:

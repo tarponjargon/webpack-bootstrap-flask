@@ -16,6 +16,8 @@
             <div class="divider-custom-icon"><i class="fas fa-paw"></i></div>
             <div class="divider-custom-line"></div>
         </div>
+
+        <!-- filters and prev/next -->
         <div class="row">
           <div class="col-12 col-lg-3 mb-2 mb-lg-4 d-flex justify-content-start align-items-center">
             <select
@@ -59,9 +61,10 @@
           <div class="col-12 col-lg-3 mb-2 mb-lg-4 d-flex align-items-center justify-content-between justify-content-lg-end">
             {{ render_paging(prev_url, next_url) }}
           </div>
-
         </div>
+        <!-- /filters and prev/next -->
 
+        <!-- results -->
         <div class="row">
           {% if puppies.animals | length == 0 %}
             <h2>No puppies found! <i class="fas fa-sad-tear fw-normal"></i></h2>
@@ -90,17 +93,26 @@
                   </a>
                 </h3>
                 <a
-                  href="#"
+                  href="/puppy/{{puppy.id}}"
                   class="btn btn-sm btn-primary read-more-btn"
                   role="button"
                 >Read More <i class="fas fa-arrow-right"></i>
+                </a>
+                <a
+                  href="#"
+                  class="favorite text-danger"
+                  data-favorite="{{puppy.id}}"
+                  title="Favorite this puppy!"
+                ><i class="fas fa-heart fa-2x"></i>
                 </a>
               </div>
             </div>
 
           {% endfor %}
         </div>
+        <!-- /results -->
 
+        <!-- lower pagination-->
         <div class="row">
           <div class="col-12 col-lg-9">&nbsp;</div>
           <div class="col-12 col-lg-3 d-flex align-items-center justify-content-between justify-content-lg-end">
