@@ -1,0 +1,30 @@
+.fav-btn {
+  position: relative;
+  width: 30px;
+  height: 28px;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  margin-bottom: 5px;
+  &:before {
+    position: absolute;
+    font-family: 'Font Awesome 5 Free';
+    font-size: 30px;
+    line-height: 30px;
+    color: #dc3545;
+    font-weight:900;
+    top: 0;
+    left: 0;
+    content: "\f004";
+  }
+  .fav-count {
+    color: #fff;
+    display: block;
+    position: relative;
+    font-size: 12px;
+    font-weight: bold;
+  }
+}
