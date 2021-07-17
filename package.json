@@ -47,7 +47,8 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.9.2",
-    "bootstrap": "^5.0.2"
+    "bootstrap": "^5.0.2",
+    "js-cookie": "^2.2.1"
   },
   "author": "",
   "license": "MIT"
