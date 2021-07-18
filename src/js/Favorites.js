@@ -43,17 +43,17 @@ export default class Favorites {
 
   addFavorite = (id) => {
     const newFavorites = [...this.favorites];
-    newFavorites.push(id);
+    newFavorites.unshift(id);
     this.setFavorites(newFavorites);
     this.toggleButton(id);
-    this.toast.show("Favorite added!");
+    this.toast.success("Favorite added!");
   };
 
   removeFavorite = (id) => {
     const newFavorites = this.favorites.filter((i) => i !== id);
     this.setFavorites(newFavorites);
     this.toggleButton(id);
-    this.toast.show("Favorite removed");
+    this.toast.danger("Favorite removed");
   };
 
   setFavorites = (newFavorites) => {
@@ -61,6 +61,7 @@ export default class Favorites {
     Cookies.set("favorites", JSON.stringify(this.favorites), {
       expires: CFG.expireFavorites,
       path: "/",
+      secure: CFG.cookieSecure,
     });
     this.updateCount(this.favorites.length);
   };
