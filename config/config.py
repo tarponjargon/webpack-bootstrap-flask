@@ -12,6 +12,8 @@ class Config(object):
     STORE_ZIP = "123456"
     STORE_PHONE = "1-800-PUPPIES"
 
+    DEFAULT_IMAGE = "/assets/images/puppy.jpg"
+
     # might need to get your own
     PETFINDER_API = "https://api.petfinder.com/v2"
     PETFINDER_API_KEY = "cOPI6mxazHTvCgQ2BZWh2grAbYo6JWJem8sY7QzXhNoOMiddlB"

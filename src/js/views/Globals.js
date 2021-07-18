@@ -1,11 +1,8 @@
-import { ScrollSpy } from "bootstrap";
-
 export default class Globals {
   constructor() {}
 
   init = () => {
     this.navbarShrink();
-    this.mainNavScrollspy();
     this.toggleNavbar();
     document.addEventListener("scroll", this.navbarShrink);
   };
@@ -17,17 +14,6 @@ export default class Globals {
       navbarCollapsible.classList.remove("navbar-shrink");
     } else {
       navbarCollapsible.classList.add("navbar-shrink");
-    }
-  };
-
-  mainNavScrollspy = () => {
-    // Activate Bootstrap scrollspy on the main nav element
-    const mainNav = document.body.querySelector("#mainNav");
-    if (mainNav) {
-      new ScrollSpy(document.body, {
-        target: "#mainNav",
-        offset: 72,
-      });
     }
   };
 

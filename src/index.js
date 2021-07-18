@@ -1,5 +1,5 @@
 import "./scss/style.scss";
-import "bootstrap";
+import "bootstrap"; // inits bootstrap for any data-api stuff on pages
 import routes from "./js/routes";
 import Globals from "./js/views/Globals";
 import Favorites from "./js/Favorites";

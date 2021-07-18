@@ -51,3 +51,9 @@ class PetFinder:
         headers = {"Authorization": "Bearer " + current_app.config["PETFINDER_AUTH"]["access_token"]}
         response = requests.get(f"{self.url}/animals", headers=headers, params=params)
         return response.json()
+
+    @refresh_jwt.refresh_token
+    def get_puppy(self, id):
+        headers = {"Authorization": "Bearer " + current_app.config["PETFINDER_AUTH"]["access_token"]}
+        response = requests.get(f"{self.url}/animals/{id}", headers=headers)
+        return response.json()

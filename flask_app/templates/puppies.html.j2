@@ -75,19 +75,19 @@
 
           {% for puppy in puppies.animals %}
 
-            {% set thumb = "/assets/images/puppy.jpg" %}
-            {% if puppy.photos|length > 1 %}
-              {% set thumb = puppy.photos[0].medium %}
+            {% set thumb = config.DEFAULT_IMAGE %}
+            {% if puppy.primary_photo_cropped and puppy.primary_photo_cropped.small %}
+              {% set thumb = puppy.primary_photo_cropped.small %}
             {% endif %}
 
             <div class="col-12 col-md-6 col-lg-4 col-xl-3 text-center pb-5">
               <div class="card-box h-100 position-relative">
                 <div class="card-thumb-container">
                   <div class="card-thumbnail">
-                    <img src="{{ thumb }}" class="img-fluid" alt="{{ puppy.name }}" />
+                    <a href="/puppy/{{ puppy.id }}"><img src="{{ thumb }}" class="img-fluid" alt="{{ puppy.name }}" /></a>
                   </div>
                   <h3>
-                    <a href="#" class="mt-4 text-danger">
+                    <a href="/puppy/{{ puppy.id }}" class="mt-4 text-danger">
                       {{ puppy.name }} -
                       {{puppy.contact.address.city}},
                       {{puppy.contact.address.state}}

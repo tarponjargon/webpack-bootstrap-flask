@@ -47,6 +47,13 @@ def puppies():
     return render_template("puppies.html.j2", puppies=puppies, params=params, prev_url=prev_url, next_url=next_url)
 
 
+@views.route("/puppy/<int:id>")
+def puppy(id):
+    petfinder = PetFinder()
+    result = petfinder.get_puppy(id)
+    return render_template("puppy.html.j2", puppy=result["animal"])
+
+
 @views.route("/about")
 def about():
     return render_template("about.html.j2")

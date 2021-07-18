@@ -2,6 +2,7 @@ import Cookies from "js-cookie";
 import myToast from "./Toast";
 
 export default class Favorites {
+  // CRUD methods for puppy favorites.  the data store is a JSON object in a cookie
   constructor() {
     this.favorites = this.getFavorites();
     this.toast = new myToast();

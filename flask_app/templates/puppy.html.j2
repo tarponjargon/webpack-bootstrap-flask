@@ -1,0 +1,32 @@
+{% extends "base.html.j2" %}
+{% set title %}Puppy @ {{ config.STORE_NAME }}{% endset %}
+{% set page = 'puppy' %}
+{% block content %}
+
+<section class="masthead page-section bg-white mb-0" id="{{ page }}">
+    <div class="container">
+      <div class= "row">
+        <div class="col-6 d-flex align-items-center justify-content-center">
+          {% set image = config.DEFAULT_IMAGE %}
+          {% if puppy.primary_photo_cropped and puppy.primary_photo_cropped.full %}
+            {% set image = puppy.primary_photo_cropped.full %}
+          {% endif %}
+
+          <img src="{{ image }}" class="img-fluid" alt="{{ puppy.name }}" />
+        </div>
+        <div class="col-5">
+          <h1>{{ puppy.name }}</h1>
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <h2>description:</h2>
+          <p>{{ puppy.description }}</p>
+        </div>
+      </div>
+    </div>
+</section>
+
+{% endblock %}
