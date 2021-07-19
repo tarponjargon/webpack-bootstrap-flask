@@ -1,4 +1,5 @@
 {% extends "base.html.j2" %}
+{% from 'includes/masthead_macro.html.j2' import render_masthead %}
 {% from 'includes/paging_macro.html.j2' import render_paging %}
 {% from 'includes/breeds_macro.html.j2' import render_breeds %}
 {% from 'includes/states_macro.html.j2' import render_states %}
@@ -10,12 +11,7 @@
 
 <section class="masthead page-section bg-white mb-0" id="{{ page }}">
     <div class="container">
-        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Get Puppies</h2>
-        <div class="divider-custom">
-            <div class="divider-custom-line"></div>
-            <div class="divider-custom-icon"><i class="fas fa-paw"></i></div>
-            <div class="divider-custom-line"></div>
-        </div>
+        {{ render_masthead("GET PUPPIES")}}
 
         <!-- filters and prev/next -->
         <div class="row">

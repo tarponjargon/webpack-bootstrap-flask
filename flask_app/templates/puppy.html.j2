@@ -1,32 +1,39 @@
 {% extends "base.html.j2" %}
-{% set title %}Puppy @ {{ config.STORE_NAME }}{% endset %}
+{% from 'includes/masthead_macro.html.j2' import render_masthead %}
+{% set title %}{{ puppy.name}} - {{ puppy.breeds.primary }} @ {{ config.STORE_NAME }}{% endset %}
 {% set page = 'puppy' %}
 {% block content %}
 
 <section class="masthead page-section bg-white mb-0" id="{{ page }}">
-    <div class="container">
-      <div class= "row">
-        <div class="col-6 d-flex align-items-center justify-content-center">
-          {% set image = config.DEFAULT_IMAGE %}
-          {% if puppy.primary_photo_cropped and puppy.primary_photo_cropped.full %}
-            {% set image = puppy.primary_photo_cropped.full %}
-          {% endif %}
+  <div class="container">
+    {{ render_masthead(puppy.name)}}
+    <div class= "row">
+      <div class="col-6 pe-auto pe-xl-4 d-flex align-items-center justify-content-center">
+        {% set image = config.DEFAULT_IMAGE %}
+        {% if puppy.primary_photo_cropped and puppy.primary_photo_cropped.full %}
+          {% set image = puppy.primary_photo_cropped.full %}
+        {% endif %}
 
-          <img src="{{ image }}" class="img-fluid" alt="{{ puppy.name }}" />
-        </div>
-        <div class="col-5">
-          <h1>{{ puppy.name }}</h1>
-
-        </div>
+        <img src="{{ image }}" class="img-fluid" alt="{{ puppy.name }}" />
       </div>
+      <div class="col-6">
+        <h1 class="pb-3 mb-3 border-bottom">{{ puppy.name }}</h1>
+        <p>
+          <strong>{{ puppy.breeds.primary }}</strong>
+          &middot;
+          {{ puppy.contact.address.city }}, {{ puppy.contact.address.state }}
+        </p>
 
-      <div class="row">
-        <div class="col-12">
-          <h2>description:</h2>
-          <p>{{ puppy.description }}</p>
-        </div>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col-12">
+        <h2>description:</h2>
+        <p>{{ puppy.description }}</p>
+      </div>
+    </div>
+  </div>
 </section>
 
 {% endblock %}
