@@ -1,10 +1,10 @@
 {% extends "base.html.j2" %}
-{% from 'includes/masthead_macro.html.j2' import render_masthead %}
-{% from 'includes/paging_macro.html.j2' import render_paging %}
-{% from 'includes/breeds_macro.html.j2' import render_breeds %}
-{% from 'includes/states_macro.html.j2' import render_states %}
-{% from 'includes/dog_size_macro.html.j2' import render_dog_size %}
-{% from 'includes/resetfilter_macro.html.j2' import reset_filter with context %}
+{% from 'macros/masthead.html.j2' import render_masthead %}
+{% from 'macros/paging.html.j2' import render_paging %}
+{% from 'macros/breeds_select.html.j2' import render_breeds %}
+{% from 'macros/states_select.html.j2' import render_states %}
+{% from 'macros/dog_size_select.html.j2' import render_dog_size %}
+{% from 'macros/resetfilter.html.j2' import reset_filter with context %}
 {% set title %}Puppies @ {{ config.STORE_NAME }}{% endset %}
 {% set page = 'puppies' %}
 {% block content %}

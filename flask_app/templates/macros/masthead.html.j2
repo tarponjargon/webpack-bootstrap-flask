@@ -1,5 +1,5 @@
-{% macro render_masthead(heading) -%}
-<h1 class="page-section-heading text-center text-uppercase text-secondary mb-0">{{ heading }}</h1>
+{% macro render_masthead(heading, font_class="text-secondary") -%}
+<h1 class="page-section-heading text-center {{font_class}} text-uppercase mb-0">{{ heading }}</h1>
 <div class="divider-custom">
     <div class="divider-custom-line"></div>
     <div class="divider-custom-icon"><i class="fas fa-paw"></i></div>

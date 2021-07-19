@@ -1,5 +1,5 @@
 {% extends "base.html.j2" %}
-{% from 'includes/masthead_macro.html.j2' import render_masthead %}
+{% from 'macros/masthead.html.j2' import render_masthead %}
 {% set title %}{{ puppy.name}} - {{ puppy.breeds.primary }} @ {{ config.STORE_NAME }}{% endset %}
 {% set page = 'puppy' %}
 {% block content %}
@@ -7,8 +7,8 @@
 <section class="masthead page-section bg-white mb-0" id="{{ page }}">
   <div class="container">
     {{ render_masthead(puppy.name)}}
-    <div class= "row">
-      <div class="col-6 pe-auto pe-xl-4 d-flex align-items-center justify-content-center">
+    <div class="row mt-5">
+      <div class="col-6 d-flex align-items-center justify-content-center">
         {% set image = config.DEFAULT_IMAGE %}
         {% if puppy.primary_photo_cropped and puppy.primary_photo_cropped.full %}
           {% set image = puppy.primary_photo_cropped.full %}
@@ -17,20 +17,23 @@
         <img src="{{ image }}" class="img-fluid" alt="{{ puppy.name }}" />
       </div>
       <div class="col-6">
-        <h1 class="pb-3 mb-3 border-bottom">{{ puppy.name }}</h1>
-        <p>
-          <strong>{{ puppy.breeds.primary }}</strong>
+        <h2 class="pb-3 mb-3 border-bottom">
+          {{ puppy.breeds.primary }}
           &middot;
           {{ puppy.contact.address.city }}, {{ puppy.contact.address.state }}
-        </p>
+        </h2>
+        <div class="d-block w-100">
+          <p class="lead pb-3 mb-3 border-bottom">
+            {{ puppy.age }} &middot;
+            {{ puppy.gender }} &middot;
+            {{ puppy.size }}
+          </p>
+        </div>
 
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-12">
-        <h2>description:</h2>
-        <p>{{ puppy.description }}</p>
+        <div class="d-block w-100 mt-4">
+          <h3>About {{puppy.name}}</h3>
+          <p>{{ puppy.description }}</p>
+        </div>
       </div>
     </div>
   </div>

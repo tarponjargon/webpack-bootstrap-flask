@@ -1,4 +1,5 @@
 {% extends "base.html.j2" %}
+{% from 'macros/masthead.html.j2' import render_masthead %}
 {% set title %}Welcome to {{ config.STORE_NAME }}{% endset %}
 {% set page = 'home' %}
 
@@ -17,17 +18,10 @@
   <header class="masthead bg-primary text-white text-center">
       <div class="container d-flex align-items-center flex-column">
           <!-- Masthead Avatar Image-->
-          <img class="masthead-avatar mb-5" src="assets/images/avataaars.svg" alt="..." />
-          <!-- Masthead Heading-->
-          <h1 class="masthead-heading text-uppercase mb-0">Start Bootstrap</h1>
-          <!-- Icon Divider-->
-          <div class="divider-custom divider-light">
-              <div class="divider-custom-line"></div>
-              <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-              <div class="divider-custom-line"></div>
-          </div>
-          <!-- Masthead Subheading-->
-          <p class="masthead-subheading font-weight-light mb-0">Graphic Artist - Web Designer - Illustrator</p>
+          <img class="masthead-avatar mb-5" src="assets/images/avataaars.svg" alt="{{config.STORE_NAME}} Masthead" />
+
+          {{ render_masthead(config.STORE_NAME, 'text-white')}}
+          <p class="masthead-subheading font-weight-light mb-0">get - puppies - for - you</p>
       </div>
   </header>
 
