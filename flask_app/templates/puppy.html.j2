@@ -8,7 +8,7 @@
   <div class="container">
     {{ render_masthead(puppy.name)}}
     <div class="row mt-5">
-      <div class="col-6 d-flex align-items-center justify-content-center">
+      <div class="col-12 col-md-6 d-flex align-items-center justify-content-center">
         {% set image = config.DEFAULT_IMAGE %}
         {% if puppy.primary_photo_cropped and puppy.primary_photo_cropped.full %}
           {% set image = puppy.primary_photo_cropped.full %}
@@ -16,7 +16,7 @@
 
         <img src="{{ image }}" class="img-fluid" alt="{{ puppy.name }}" />
       </div>
-      <div class="col-6">
+      <div class="col-12 col-md-6 mt-5 mt-md-0">
         <h2 class="pb-3 mb-3 border-bottom">
           {{ puppy.breeds.primary }}
           &middot;
