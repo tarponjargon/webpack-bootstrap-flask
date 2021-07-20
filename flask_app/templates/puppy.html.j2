@@ -1,5 +1,6 @@
 {% extends "base.html.j2" %}
 {% from 'macros/masthead.html.j2' import render_masthead %}
+{% from 'macros/favorite_button.html.j2' import render_favorite %}
 {% set title %}{{ puppy.name}} - {{ puppy.breeds.primary }} @ {{ config.STORE_NAME }}{% endset %}
 {% set page = 'puppy' %}
 {% block content %}
@@ -8,15 +9,16 @@
   <div class="container">
     {{ render_masthead(puppy.name)}}
     <div class="row mt-5">
-      <div class="col-12 col-md-6 d-flex align-items-center justify-content-center">
+      <div class="col-12 col-md-6 d-flex justify-content-center">
         {% set image = config.DEFAULT_IMAGE %}
         {% if puppy.primary_photo_cropped and puppy.primary_photo_cropped.full %}
           {% set image = puppy.primary_photo_cropped.full %}
         {% endif %}
 
-        <img src="{{ image }}" class="img-fluid" alt="{{ puppy.name }}" />
+        <img src="{{ image }}" class="rounded img-fluid" alt="{{ puppy.name }}" />
       </div>
-      <div class="col-12 col-md-6 mt-5 mt-md-0">
+      <div class="col-12 col-md-6 mt-5 mt-md-0 position-relative puppy-details">
+        {{ render_favorite(puppy.id) }}
         <h2 class="pb-3 mb-3 border-bottom">
           {{ puppy.breeds.primary }}
           &middot;
@@ -33,6 +35,24 @@
         <div class="d-block w-100 mt-4">
           <h3>About {{puppy.name}}</h3>
           <p>{{ puppy.description }}</p>
+          <h4>Characteristics</h4>
+          loving, playful
+
+          {% if puppy.coat %}
+          <h4>Coat</h4>
+          {{ puppy.coat }}
+          {% endif %}
+
+          <h4>House Trained</h4>
+          <p>{{ puppy.attributes.house_trained }}</p>
+          <h4>Good in a home with</h4>
+          Other cats.
+          <h4>Adoption Fee</h4>
+          $100.00
+
+          <div class="w-100 pt-4 text-center">
+            <a href="#" role="button" class="btn btn-primary">More information on {{ puppy.name }}</a>
+          </div>
         </div>
       </div>
     </div>

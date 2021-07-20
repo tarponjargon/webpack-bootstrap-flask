@@ -2,6 +2,15 @@ body {
   font-family: "Montserrat", Arial, Helvetica, sans-serif;
   font-size: 1.2rem;
 }
+.navbar-nav {
+  li.nav-item {
+    a.nav-link {
+      @media (min-width: 992px) and (max-width: 1200px) {
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
 .fav-btn {
   position: relative;
   width: 30px;

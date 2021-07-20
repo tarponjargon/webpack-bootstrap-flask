@@ -3,18 +3,6 @@ html {
   scroll-padding-top: calc(4.5rem - 1px);
 }
 
-.custom-img-fluid {
-  display: block;
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  font-family: "object-fit:cover";
-  -o-object-fit: cover;
-  object-fit: cover;
-}
-
 .page-section {
   padding: 6rem 0;
   .page-section-heading {

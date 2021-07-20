@@ -5,20 +5,54 @@
 	border-radius: 10px;
 	min-height: 400px;
 	.card-thumbnail {
-		max-height: 250px;
-		overflow: hidden;
-		border-radius: 10px;
-		transition: 1s;
-		&:hover {
-			transform: scale(1.2);
-		}
+
+    .custom-img-fluid {
+      display: block;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      font-family: "object-fit:cover";
+      object-fit: cover;
+      border-radius: 10px;
+    }
 	}
-	h3 {
-		a {
-			font-size: 20px;
-			text-decoration: none;
-		}
-	}
+  .card-foot {
+    position: absolute;
+    height: 100px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: #fff;
+    &::before {
+      content: "";
+      display: block;
+      height: 18px;
+      border-radius: 50% 50% 0 0;
+      position: absolute;
+      bottom: calc(100% - 10px);
+      right: 0;
+      left: 0;
+      background-color: #fff;
+    }
+    .card-title {
+      padding: 0 5px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      h2 {
+        font-size: 20px;
+        line-height: 23px;
+        a {
+          text-decoration: none;
+        }
+      }
+    }
+  }
 }
 .read-more-btn {
 	position: absolute;
@@ -29,18 +63,35 @@
 	width: 40%;
 }
 
-.favorite {
+.favorite-container {
+  z-index: 2;
+  width: 45px;
+  height: 45px;
   position: absolute;
-  bottom: 16px;
-  left: 7%;
-  transition: 0.5s;
-  .fas {
-    font-weight: 400;
-  }
-  &:hover {
-    transform: scale(1.1);
+  top: 16px;
+  right: 16px;
+  border-radius: 50%;
+  border-color: transparent;
+  background-color: hsla(0,0%,100%,.75);
+  transition: background-color .15s;
+  .favorite {
+    transition: 0.5s;
     .fas {
-      font-weight: 900;
+      font-weight: 400;
+    }
+    &:hover {
+      transform: scale(1.1);
+      .fas {
+        font-weight: 900;
+      }
     }
   }
 }
+
+.puppy-details {
+  .favorite-container {
+    height: auto;
+    top: 0;
+  }
+}
+

@@ -4,6 +4,7 @@
 {% from 'macros/breeds_select.html.j2' import render_breeds %}
 {% from 'macros/states_select.html.j2' import render_states %}
 {% from 'macros/dog_size_select.html.j2' import render_dog_size %}
+{% from 'macros/favorite_button.html.j2' import render_favorite %}
 {% from 'macros/resetfilter.html.j2' import reset_filter with context %}
 {% set title %}Puppies @ {{ config.STORE_NAME }}{% endset %}
 {% set page = 'puppies' %}
@@ -78,31 +79,23 @@
 
             <div class="col-12 col-md-6 col-lg-4 col-xl-3 text-center pb-5">
               <div class="card-box h-100 position-relative">
+                {{ render_favorite(puppy.id) }}
                 <div class="card-thumb-container">
                   <div class="card-thumbnail">
                     <a href="/puppy/{{ puppy.id }}"><img src="{{ thumb }}" class="custom-img-fluid" alt="{{ puppy.name }}" /></a>
                   </div>
-                  <h3>
-                    <a href="/puppy/{{ puppy.id }}" class="mt-4 text-danger">
-                      {{ puppy.name }} -
-                      {{puppy.contact.address.city}},
-                      {{puppy.contact.address.state}}
-                    </a>
-                  </h3>
                 </div>
-                <a
-                  href="/puppy/{{puppy.id}}"
-                  class="btn btn-sm btn-primary read-more-btn"
-                  role="button"
-                >Read More <i class="fas fa-arrow-right"></i>
-                </a>
-                <a
-                  href="#"
-                  class="favorite text-danger"
-                  data-favorite="{{puppy.id}}"
-                  title="Favorite this puppy!"
-                ><i class="fas fa-heart fa-2x"></i>
-                </a>
+                <div class="card-foot">
+                  <div class="card-title">
+                    <h2>
+                      <a href="/puppy/{{puppy.id}}">
+                        {{ puppy.name }} -
+                        {{puppy.contact.address.city}},
+                        {{puppy.contact.address.state}}
+                      </a>
+                    </h2>
+                  </div>
+                </div>
               </div>
             </div>
 
