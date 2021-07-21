@@ -1,4 +1,4 @@
-export default class Globals {
+export default class Global {
   constructor() {}
 
   init = () => {
@@ -31,4 +31,4 @@ export default class Globals {
       });
     });
   };
-} // end Globals class def
+} // end Global class def

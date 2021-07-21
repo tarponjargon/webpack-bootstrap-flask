@@ -1,0 +1,14 @@
+{% extends "base.html.j2" %}
+{% from 'macros/masthead.html.j2' import render_masthead %}
+{% set title %}Your Favorites @ {{ config.STORE_NAME }}{% endset %}
+{% set page = 'favorites' %}
+{% block content %}
+
+<section class="masthead page-section bg-white mb-0" id="{{ page }}">
+  <div class="container">
+    {{ render_masthead("Your Favorites")}}
+    <div data-js="favorites-container"></div>
+  </div>
+</section>
+
+{% endblock %}

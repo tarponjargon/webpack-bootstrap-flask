@@ -54,6 +54,11 @@ def puppy(id):
     return render_template("puppy.html.j2", puppy=result["animal"])
 
 
+@views.route("/favorites")
+def favorites():
+    return render_template("favorites.html.j2")
+
+
 @views.route("/about")
 def about():
     return render_template("about.html.j2")
