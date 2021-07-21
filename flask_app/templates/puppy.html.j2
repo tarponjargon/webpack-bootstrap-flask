@@ -35,23 +35,36 @@
         <div class="d-block w-100 mt-4">
           <h3>About {{puppy.name}}</h3>
           <p>{{ puppy.description }}</p>
+
+          {% if puppy.age %}
+          <h4>Age</h4>
+          <p>{{ puppy.age }}</p>
+          {% endif %}
+
+          {% if puppy.tags | length %}
           <h4>Characteristics</h4>
-          loving, playful
+          <p>{{ ', '.join(puppy.tags) }}</p>
+          {% endif %}
 
           {% if puppy.coat %}
           <h4>Coat</h4>
-          {{ puppy.coat }}
+          <p>{{ puppy.coat }}</p>
           {% endif %}
 
           <h4>House Trained</h4>
-          <p>{{ puppy.attributes.house_trained }}</p>
+          <p>{{ 'Yes' if puppy.attributes.house_trained else 'No' }}</p>
+
+          {% if puppy.environment.cats or puppy.environment.children or puppy.environment.dogs %}
           <h4>Good in a home with</h4>
-          Other cats.
-          <h4>Adoption Fee</h4>
-          $100.00
+          {% if puppy.environment.cats %}<p>Cats</p>{% endif %}
+          {% if puppy.environment.children %}<p>Children</p>{% endif %}
+          {% if puppy.environment.dogs %}<p>Other dogs</p>{% endif %}
+          {% endif %}
+
+
 
           <div class="w-100 pt-4 text-center">
-            <a href="#" role="button" class="btn btn-primary">More information on {{ puppy.name }}</a>
+            <a href="#" role="button" class="btn btn-primary"><h3>More information on {{ puppy.name }}</h3></a>
           </div>
         </div>
       </div>

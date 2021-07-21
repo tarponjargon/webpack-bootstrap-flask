@@ -56,4 +56,12 @@ class PetFinder:
     def get_puppy(self, id):
         headers = {"Authorization": "Bearer " + current_app.config["PETFINDER_AUTH"]["access_token"]}
         response = requests.get(f"{self.url}/animals/{id}", headers=headers)
-        return response.json()
+        data = response.json()
+        # scrub PID from response
+        try:
+            data["animal"]["contact"]["address"]["address1"] = None
+            data["animal"]["contact"]["email"] = None
+            data["animal"]["contact"]["phone"] = None
+        except KeyError:
+            pass
+        return data
