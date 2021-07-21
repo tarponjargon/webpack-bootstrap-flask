@@ -2,5 +2,4 @@
 module.exports = {
   storeName: "Let's Pet Puppies!",
   maxFavorites: 25,
-  expireFavorites: 365, //days
 };

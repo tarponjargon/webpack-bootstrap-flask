@@ -1,26 +1,29 @@
-import Cookies from "js-cookie";
 import myToast from "./Toast";
+import { getJson } from "./Utils";
 
 export default class Favorites {
-  // CRUD methods for puppy favorites.  the data store is a JSON object in a cookie
+  // CRUD methods for puppy favorites.  the data store is a JSON object in localstorage
   constructor() {
-    this.favorites = this.getFavorites();
+    const ls = localStorage.getItem("favorites");
+    this.favorites = ls ? JSON.parse(ls) : [];
     this.toast = new myToast();
   }
 
   init = () => {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       // attach click handlers to favorite btns
       const favoriteBtns = Array.from(document.querySelectorAll("[data-favorite]"));
       favoriteBtns.map((s) => s.addEventListener("click", this.favoriteClick, false));
 
-      // update default state for any pre-selected favorites
+      // update default state for any previously selected favorites in view
       this.favorites.forEach((i) => {
-        this.toggleButton(i);
+        this.toggleButton(i.id);
       });
 
       // update favorite count in UI
       this.updateCount(this.favorites.length);
+
+      resolve();
     });
   };
 
@@ -28,7 +31,7 @@ export default class Favorites {
     e.preventDefault();
     if (e.currentTarget.getAttribute("data-favorite")) {
       const id = e.currentTarget.getAttribute("data-favorite");
-      if (this.favorites.includes(id)) {
+      if (this.getFavoriteById(id)) {
         // a click on an active favorite toggles it off
         this.removeFavorite(id);
       } else {
@@ -37,21 +40,17 @@ export default class Favorites {
     }
   };
 
-  getFavorites = () => {
-    const cookie = Cookies.get("favorites");
-    return cookie ? JSON.parse(cookie) : [];
-  };
-
-  addFavorite = (id) => {
+  addFavorite = async (id) => {
     const newFavorites = [...this.favorites];
-    newFavorites.unshift(id);
+    const puppy = await getJson(`/api/puppy/${id}`);
+    newFavorites.unshift(puppy);
     this.setFavorites(newFavorites);
     this.toggleButton(id);
     this.toast.success("Favorite added!");
   };
 
   removeFavorite = (id) => {
-    const newFavorites = this.favorites.filter((i) => i !== id);
+    const newFavorites = this.favorites.filter((i) => i.id.toString() !== id.toString());
     this.setFavorites(newFavorites);
     this.toggleButton(id);
     this.toast.danger("Favorite removed");
@@ -59,12 +58,12 @@ export default class Favorites {
 
   setFavorites = (newFavorites) => {
     this.favorites = newFavorites.slice(0, CFG.maxFavorites);
-    Cookies.set("favorites", JSON.stringify(this.favorites), {
-      expires: CFG.expireFavorites,
-      path: "/",
-      secure: CFG.cookieSecure,
-    });
+    localStorage.setItem("favorites", JSON.stringify(this.favorites));
     this.updateCount(this.favorites.length);
+  };
+
+  getFavoriteById = (id) => {
+    return this.favorites.find((i) => i.id.toString() === id.toString());
   };
 
   toggleButton = (id) => {
