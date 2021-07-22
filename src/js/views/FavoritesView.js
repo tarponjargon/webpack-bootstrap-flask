@@ -31,12 +31,21 @@ export default class FavoritesView {
   };
 
   renderFavorites = () => {
-    const favoriteHTML = `
-      <div class="row">
-        ${this.favorite.puppies.map((p) => this.renderThumbnail(p)).join("")}
-      </div>
-    `;
-
+    let favoriteHTML = "";
+    if (this.favorite.puppies.length) {
+      favoriteHTML = `
+        <div class="row">
+          ${this.favorite.puppies.map((p) => this.renderThumbnail(p)).join("")}
+        </div>
+      `;
+    } else {
+      favoriteHTML = `
+        <h2>No favorites yet! <i class="fas fa-sad-tear fw-normal"></i></h2>
+        <p>
+          <a href="/puppies">Find some puppies</a>.
+        </p>
+      `;
+    }
     this.container.innerHTML = favoriteHTML;
   };
 
@@ -46,7 +55,7 @@ export default class FavoritesView {
         <div class="card-box h-100 position-relative">
           <button
             class="favorite-container"
-            title="Remove from favorites"
+            title="Remove from favorites :("
           >
             <div
               class="favorite pt-1 text-danger"
