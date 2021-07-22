@@ -1,9 +1,8 @@
 {% macro render_favorite(id) -%}
-  <button class="favorite-container">
+  <button class="favorite-container" title="Favorite this puppy!">
     <div
       class="favorite pt-1 text-danger"
       data-favorite="{{id}}"
-      title="Favorite this puppy!"
     ><i class="fas fa-heart"></i>
   </button>
 {%- endmacro %}

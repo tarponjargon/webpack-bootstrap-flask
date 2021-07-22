@@ -48,6 +48,8 @@ export default class Favorite {
     this.setFavorites(newPuppies);
     this.toggleButton(id);
     this.toast.success("Favorite added!");
+    const favoriteAdded = new CustomEvent("favoriteadded", { detail: { id } });
+    document.dispatchEvent(favoriteAdded);
   };
 
   removeFavorite = (id) => {
@@ -55,6 +57,8 @@ export default class Favorite {
     this.setFavorites(newPuppies);
     this.toggleButton(id);
     this.toast.danger("Favorite removed");
+    const favoriteRemoved = new CustomEvent("favoriteremoved", { detail: { id } });
+    document.dispatchEvent(favoriteRemoved);
   };
 
   setFavorites = (newPuppies) => {

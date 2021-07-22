@@ -2,4 +2,5 @@
 module.exports = {
   storeName: "Let's Pet Puppies!",
   maxFavorites: 25,
+  defaultImage: "/assets/images/puppy.jpg",
 };
