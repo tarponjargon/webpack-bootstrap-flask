@@ -2,7 +2,9 @@ import myToast from "./Toast";
 import { getJson } from "./Utils";
 
 export default class Favorite {
-  // CRUD methods for puppy favorites.  the data store is a JSON object in localstorage
+  // CRUD methods for puppy favorites.  petfinder doesn't allow bulk lookups, so looking up each favorite
+  // by id would be a separate http request.  So I am storing the favorite json objects as an array in
+  // localStorage
   constructor() {
     this.key = "puppies";
     const ls = localStorage.getItem(this.key);
@@ -14,7 +16,7 @@ export default class Favorite {
     return new Promise((resolve) => {
       // attach click handlers to favorite btns
       const favoriteBtns = Array.from(document.querySelectorAll("[data-favorite]"));
-      favoriteBtns.map((s) => s.addEventListener("click", this.favoriteClick, false));
+      favoriteBtns.map((s) => s.addEventListener("click", this.favoriteHandler, false));
 
       // update default state for any previously selected favorites in view
       this.puppies.forEach((i) => {
@@ -28,7 +30,7 @@ export default class Favorite {
     });
   };
 
-  favoriteClick = (e) => {
+  favoriteHandler = (e) => {
     e.preventDefault();
     if (e.currentTarget.getAttribute("data-favorite")) {
       const id = e.currentTarget.getAttribute("data-favorite");
@@ -48,6 +50,7 @@ export default class Favorite {
     this.setFavorites(newPuppies);
     this.toggleButton(id);
     this.toast.success("Favorite added!");
+    // announces to the rest of the app that a favorite has been added
     const favoriteAdded = new CustomEvent("favoriteadded", { detail: { id } });
     document.dispatchEvent(favoriteAdded);
   };
@@ -57,11 +60,13 @@ export default class Favorite {
     this.setFavorites(newPuppies);
     this.toggleButton(id);
     this.toast.danger("Favorite removed");
+    // announces to the rest of the app that a favorite has been removed
     const favoriteRemoved = new CustomEvent("favoriteremoved", { detail: { id } });
     document.dispatchEvent(favoriteRemoved);
   };
 
   setFavorites = (newPuppies) => {
+    // save to localStorage and update count in UI
     this.puppies = newPuppies.slice(0, CFG.maxFavorites);
     localStorage.setItem(this.key, JSON.stringify(this.puppies));
     this.updateCount(this.puppies.length);
@@ -72,11 +77,13 @@ export default class Favorite {
   };
 
   toggleButton = (id) => {
+    // show the favorite button as solid if favorited (or remove)
     const el = document.querySelector(`[data-favorite="${id}"] i`);
     if (el) el.classList.toggle("fw-bold");
   };
 
   updateCount = (count) => {
+    // update count in UI
     document.querySelector('[data-js="fav-count"]').innerText = count;
   };
 }

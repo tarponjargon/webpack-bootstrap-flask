@@ -1,4 +1,4 @@
-import Favorite from "../Favorite";
+import Favorite from "../modules/Favorite";
 
 export default class FavoritesView {
   constructor() {

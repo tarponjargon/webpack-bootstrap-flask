@@ -1,8 +1,8 @@
 import "./scss/style.scss";
 import "bootstrap"; // inits bootstrap for any data-api stuff on pages
 import routes from "./js/routes";
-import Global from "./js/Global";
-import Favorite from "./js/Favorite";
+import Global from "./js/modules/Global";
+import Favorite from "./js/modules/Favorite";
 
 // init route controllers (handles code-splitting)
 routes();

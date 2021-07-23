@@ -4,6 +4,8 @@ from flask import current_app
 
 
 class PetFinder:
+    """API request module for petfinder.com.  Wraps all requests in a token-checker which auto-renews their oauth token if expired"""
+
     url = None
     key = None
     secret = None
