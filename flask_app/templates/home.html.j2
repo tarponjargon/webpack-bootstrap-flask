@@ -16,8 +16,38 @@
 {% block content %}
 
   <header class="masthead bg-primary text-white text-center">
-      <div class="container d-flex align-items-center flex-column">
-          <img class="masthead-avatar mb-5" src="assets/images/avataaars.svg" alt="{{config.STORE_NAME}} Masthead" />
+      <div class="container">
+
+          <div class="glider-contain text-center mb-5">
+            <div class="glider" data-js="homepage-carousel">
+              {% for puppy in features %}
+              <div class="glider-slide position-relative">
+                  <a href="/puppy/{{puppy.id}}">
+                    <div class="glider-circle">
+                      <img src="{{puppy.primary_photo_cropped.medium}}" class="glider-slide-image" alt="{{puppy.name}}">
+                    </div>
+                    <span class="puppy-badge badge rounded-pill bg-danger">
+                      {{ puppy.name | truncate(22, False, '...', 0) }}
+                    </span>
+                  </a>
+              </div>
+              {% endfor %}
+            </div>
+            <button
+              aria-label="Previous"
+              class="slide-prev"
+              data-js="homepage-carousel-prev"
+            >
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button
+              aria-label="Next"
+              class="slide-next"
+              data-js="homepage-carousel-next"
+            >
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
 
           {{ render_masthead(config.STORE_NAME, 'text-white')}}
           <p class="masthead-subheading font-weight-light mb-0">get - puppies - for - you</p>

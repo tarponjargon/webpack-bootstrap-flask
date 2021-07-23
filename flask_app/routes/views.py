@@ -1,5 +1,3 @@
-import pprint
-from re import sub
 from flask import Blueprint, render_template, current_app, request
 from flask_app.petfinder import PetFinder
 from flask_app.helpers import safe_param, get_qs, make_qs
@@ -9,6 +7,8 @@ views = Blueprint("views", __name__)
 
 @views.context_processor
 def template_utils():
+    """template functions"""
+
     def qs(params, exclude=None):
         """make a query string from a dict inside a template"""
         return make_qs(params, exclude)
@@ -20,9 +20,9 @@ def template_utils():
 def home():
     petfinder = PetFinder()
     data = petfinder.get_babies()
-    babies = [i for i in data if "primary_photo_cropped" in i]
-    features = babies[:4]
-    subfeatures = babies[-10:]
+    babies = [i for i in data if "primary_photo_cropped" in i]  # only objects with images
+    features = babies[:6]  # first x are for the carousel
+    subfeatures = babies[-6:]  # last x are for the modal thumbs
     return render_template("home.html.j2", features=features, subfeatures=subfeatures)
 
 

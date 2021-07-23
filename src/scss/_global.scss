@@ -11,6 +11,19 @@ body {
     }
   }
 }
+
+.custom-img-fluid {
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: "object-fit:cover";
+  object-fit: cover;
+  border-radius: 10px;
+}
+
 .fav-btn {
   position: relative;
   width: 30px;

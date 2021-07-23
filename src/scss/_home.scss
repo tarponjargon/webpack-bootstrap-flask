@@ -1,0 +1,40 @@
+.glider-contain {
+  width: 320px;
+  height: 300px;
+  position: relative;
+  .glider-slide {
+    text-align: center;
+  }
+  .glider-circle {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+  .glider-slide-image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+  .slide-prev, .slide-next {
+    background: transparent;
+    border: none;
+    position: absolute;
+    top: 45%;
+  }
+  .slide-prev {
+    left: -20px;
+    color: #8a8a8a;
+  }
+  .slide-next {
+    right: -20px;
+    color: #8a8a8a
+  }
+  .puppy-badge {
+    position: absolute;
+    bottom: 10%;
+    right: 10%;
+    font-size: 1.2rem;
+  }
+}
