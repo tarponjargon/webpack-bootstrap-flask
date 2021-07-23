@@ -45,11 +45,11 @@ export default class Favorite {
 
   addFavorite = async (id) => {
     const newPuppies = [...this.puppies];
-    const puppy = await getJson(`/api/puppy/${id}`);
-    newPuppies.unshift(puppy);
-    this.setFavorites(newPuppies);
     this.toggleButton(id);
     this.toast.success("Favorite added!");
+    const puppy = await getJson(`/api/puppy/${id}`);
+    newPuppies.unshift(puppy); // newest at front of the list
+    this.setFavorites(newPuppies);
     // announces to the rest of the app that a favorite has been added
     const favoriteAdded = new CustomEvent("favoriteadded", { detail: { id } });
     document.dispatchEvent(favoriteAdded);

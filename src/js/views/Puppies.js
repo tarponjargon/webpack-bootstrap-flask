@@ -4,12 +4,12 @@ export default class Puppies {
   }
 
   init = () => {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       // attach change handlers to select menus
       const selects = Array.from(document.querySelectorAll('[data-js="param-change"]'));
       selects.map((s) => s.addEventListener("change", this.updateResults, false));
 
-      resolve("Puppies controller loaded");
+      resolve();
     });
   };
 

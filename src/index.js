@@ -11,6 +11,6 @@ routes();
 const global = new Global();
 global.init();
 
-// init handlers for favorite puppies
+// init favorite handlers globally
 const favorite = new Favorite();
 favorite.init();
