@@ -67,3 +67,10 @@ class PetFinder:
         except KeyError:
             pass
         return data
+
+    @refresh_jwt.refresh_token
+    def get_babies(self):
+        params = {"type": "dog", "sort": "random", "age": "baby"}
+        headers = {"Authorization": "Bearer " + current_app.config["PETFINDER_AUTH"]["access_token"]}
+        response = requests.get(f"{self.url}/animals", headers=headers, params=params)
+        return response.json()["animals"]

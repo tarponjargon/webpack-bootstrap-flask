@@ -23,6 +23,10 @@ const routes = async () => {
     const mod = await import(/* webpackPrefetch: true */ "./views/Puppies");
     return await new mod.default().init();
   }
+  if (pathname === "/puppy") {
+    const mod = await import(/* webpackPrefetch: true */ "./views/Puppy");
+    return await new mod.default().init();
+  }
   if (pathname === "/favorites") {
     const mod = await import(/* webpackPrefetch: true */ "./views/FavoritesView");
     return await new mod.default().init();

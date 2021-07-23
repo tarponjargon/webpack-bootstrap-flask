@@ -1,7 +1,7 @@
 import { Toast } from "bootstrap";
 
 export default class myToast {
-  constructor(delay = 2000) {
+  constructor(delay = 1500) {
     this.container = document.querySelector('[data-js="toast-container"]');
     this.toastEl = this.container.querySelector('[data-js="toast"]');
     this.toastText = this.container.querySelector('[data-js="toast-body"]');

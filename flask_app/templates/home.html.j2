@@ -17,7 +17,6 @@
 
   <header class="masthead bg-primary text-white text-center">
       <div class="container d-flex align-items-center flex-column">
-          <!-- Masthead Avatar Image-->
           <img class="masthead-avatar mb-5" src="assets/images/avataaars.svg" alt="{{config.STORE_NAME}} Masthead" />
 
           {{ render_masthead(config.STORE_NAME, 'text-white')}}
@@ -25,7 +24,7 @@
       </div>
   </header>
 
-  <section class="page-section portfolio" id="portfolio">
+  <section class="page-section portfolio" id="{{page}}">
       <div class="container">
           <!-- Portfolio Section Heading-->
           <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Portfolio</h2>

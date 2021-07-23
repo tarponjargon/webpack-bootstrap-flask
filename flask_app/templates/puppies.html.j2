@@ -63,14 +63,14 @@
 
         <!-- results -->
         <div class="row">
-          {% if puppies.animals | length == 0 %}
+          {% if puppies | length == 0 %}
             <h2>No puppies found! <i class="fas fa-sad-tear fw-normal"></i></h2>
             <p>
               <a href="{{ url_for(request.endpoint) }}">Remove all filters</a> to see more puppies.
             </p>
           {% endif %}
 
-          {% for puppy in puppies.animals %}
+          {% for puppy in puppies %}
 
             {% set thumb = config.DEFAULT_IMAGE %}
             {% if puppy.primary_photo_cropped and puppy.primary_photo_cropped.medium %}
