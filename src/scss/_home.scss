@@ -52,7 +52,51 @@
   .puppy-badge {
     position: absolute;
     bottom: 10%;
-    right: 10%;
+    right: 20%;
     font-size: 1.2rem;
+    @media (min-width: 768px) and (max-width: 1200px) {
+      right: 10%;
+    }
+  }
+}
+
+.portfolio {
+  .portfolio-item {
+    cursor: pointer;
+    position: relative;
+    display: block;
+    max-width: 25rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    .portfolio-item-caption {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: all 0.2s ease-in-out;
+      opacity: 0;
+      background-color: rgba(26, 188, 156, 0.9);
+      &:hover {
+        opacity: 1;
+      }
+      .portfolio-item-caption-content {
+        font-size: 1.5rem;
+      }
+    }
+    .portfolio-image {
+      width: 100%;
+      height: 288px;
+      object-fit: cover;
+    }
+  }
+}
+.portfolio-modal {
+  .btn-close {
+    color: $brand-info;
+    font-size: 2rem;
+    padding: 1rem;
+  }
+  .portfolio-modal-title {
+    font-size: 2.25rem;
+    line-height: 2rem;
   }
 }
