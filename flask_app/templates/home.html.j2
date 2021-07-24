@@ -21,7 +21,7 @@
           <div class="glider-contain text-center mb-5">
             <div class="glider" data-js="homepage-carousel">
               {% for puppy in features %}
-              <div class="glider-slide position-relative">
+              <div class="invisible glider-slide position-relative">
                   <a href="/puppy/{{puppy.id}}">
                     <div class="glider-circle">
                       <img src="{{puppy.primary_photo_cropped.medium}}" class="glider-slide-image" alt="{{puppy.name}}">
@@ -50,14 +50,13 @@
           </div>
 
           {{ render_masthead(config.STORE_NAME, 'text-white')}}
-          <p class="masthead-subheading font-weight-light mb-0">get - puppies - for - you</p>
       </div>
   </header>
 
   <section class="page-section portfolio" id="{{page}}">
       <div class="container">
           <!-- Portfolio Section Heading-->
-          <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Portfolio</h2>
+          <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Yet More Puppies</h2>
           <!-- Icon Divider-->
           <div class="divider-custom">
               <div class="divider-custom-line"></div>

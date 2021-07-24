@@ -1,3 +1,14 @@
+#page-home {
+  .divider-custom {
+    .divider-custom-line {
+      background-color: $white;
+      border-color: $white;
+    }
+    .divider-custom-icon {
+      color: $white;
+    }
+  }
+}
 .glider-contain {
   width: 320px;
   height: 300px;
@@ -11,6 +22,7 @@
     border-radius: 50%;
     overflow: hidden;
     margin: 0 auto;
+    border: 20px solid $brand-info;
   }
   .glider-slide-image {
     height: 100%;

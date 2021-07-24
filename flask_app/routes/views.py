@@ -20,8 +20,10 @@ def template_utils():
 def home():
     petfinder = PetFinder()
     data = petfinder.get_babies()
-    babies = [i for i in data if "primary_photo_cropped" in i]  # only objects with images
-    features = babies[:6]  # first x are for the carousel
+    babies = [
+        i for i in data if "primary_photo_cropped" in i and i["primary_photo_cropped"] and i["status"] == "adoptable"
+    ]  # only objects with images
+    features = babies[:9]  # first x are for the carousel
     subfeatures = babies[-6:]  # last x are for the modal thumbs
     return render_template("home.html.j2", features=features, subfeatures=subfeatures)
 

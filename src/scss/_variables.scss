@@ -1,0 +1,31 @@
+
+// Grayscale
+$gray-darker: #444444;
+$gray-dark: #6c757d;
+$gray: #9da9b9;
+$gray-light: #d5d5d5;
+$gray-lighter: #e6e6e6;
+
+// Brand colors
+$brand-primary: #0d6efd;
+$brand-info: #1abc9c;
+$brand-success: #006e46;
+$brand-warning: #9c2626;
+$brand-danger: #f01616;
+$brand-secondary: $gray-dark;
+
+// bootstrap base overrides
+$theme-colors: (
+  "primary": $brand-primary,
+  "danger": $brand-danger,
+  "warning": $brand-warning,
+  "success": $brand-success,
+  "info": $brand-info,
+  "secondary": $brand-secondary,
+  "light": $gray-light,
+  "dark": $gray-darker
+);
+
+// Borders
+$border-color: $gray-light;
+$border-light-color: $gray-lighter;
