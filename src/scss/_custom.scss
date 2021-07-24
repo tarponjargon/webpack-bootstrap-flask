@@ -149,7 +149,7 @@ html {
       left: 0;
       transition: all 0.2s ease-in-out;
       opacity: 0;
-      background-color: $brand-info;
+      background-color: rgba(26, 188, 156, 0.9);
       &:hover {
         opacity: 1;
       }
@@ -244,4 +244,14 @@ html {
 
 .toast-container {
   z-index: 2;
+}
+
+// // glider carousel fix for hiding scrollbars
+@-moz-document url-prefix() {
+	.glider-track {
+		margin-bottom: 17px;
+	}
+	.glider-wrap {
+		overflow: hidden;
+	}
 }

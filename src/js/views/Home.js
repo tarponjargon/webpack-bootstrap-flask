@@ -13,8 +13,8 @@ export default class Home {
   init = () => {
     return new Promise((resolve) => {
       this.slider = new Glider(this.carouselEl, {
-        slidesToShow: 3,
-        slidesToScroll: 3,
+        slidesToShow: 1,
+        slidesToScroll: 1,
         scrollLock: true,
         draggable: true,
         rewind: true,
@@ -24,10 +24,18 @@ export default class Home {
         },
         responsive: [
           {
+            breakpoint: 576,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              itemWidth: 320,
+            },
+          },
+          {
             breakpoint: 768,
             settings: {
-              slidesToShow: "auto",
-              slidesToScroll: "auto",
+              slidesToShow: 2,
+              slidesToScroll: 2,
               itemWidth: 320,
             },
           },

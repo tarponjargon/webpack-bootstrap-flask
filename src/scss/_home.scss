@@ -10,7 +10,7 @@
   }
 }
 .glider-contain {
-  width: 320px;
+  width: auto;
   height: 300px;
   position: relative;
   .glider-slide {
@@ -37,11 +37,17 @@
   }
   .slide-prev {
     left: -20px;
-    color: #8a8a8a;
+    color: $gray;
+    @media (max-width: 768px) {
+      left: 0;
+    }
   }
   .slide-next {
     right: -20px;
-    color: #8a8a8a
+    color: $gray;
+    @media (max-width: 768px) {
+      right: 0;
+    }
   }
   .puppy-badge {
     position: absolute;
