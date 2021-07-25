@@ -19,7 +19,6 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  font-family: "object-fit:cover";
   object-fit: cover;
   border-radius: 10px;
 }
@@ -40,7 +39,7 @@ body {
     font-family: 'Font Awesome 5 Free';
     font-size: 30px;
     line-height: 30px;
-    color: #dc3545;
+    color: $brand-danger;
     font-weight:900;
     top: 0;
     left: 0;
