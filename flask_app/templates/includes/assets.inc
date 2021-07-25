@@ -1,1 +1,1 @@
-<script defer src="/assets/app.js?5a3f42a5c78a498e2669"></script><link href="/assets/app.css?5a3f42a5c78a498e2669" rel="stylesheet">
+<script defer src="/assets/app.js?a76e64e12ecde215ec51"></script><link href="/assets/app.css?a76e64e12ecde215ec51" rel="stylesheet">
