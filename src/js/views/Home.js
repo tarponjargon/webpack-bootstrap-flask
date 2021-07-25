@@ -1,7 +1,12 @@
+import { Modal } from "bootstrap";
 import Glider from "glider-js";
+import { getJson } from "../modules/Utils";
+import { renderModal } from "../components/Modal";
 
 export default class Home {
   constructor() {
+    this.modal = new Modal(document.getElementById("myModal"));
+    this.modalContentEl = document.querySelector('[data-js="modal-content"]');
     this.carouselEl = document.querySelector("[data-js='homepage-carousel']");
     this.prevBtn = document.querySelector("[data-js='homepage-carousel-prev']");
     this.nextBtn = document.querySelector("[data-js='homepage-carousel-next']");
@@ -55,6 +60,10 @@ export default class Home {
       this.startSlider();
       this.prevBtn.addEventListener("click", this.stopSlider, false);
       this.nextBtn.addEventListener("click", this.stopSlider, false);
+
+      const modals = Array.from(document.querySelectorAll("[data-puppy-modal]"));
+      modals.map((s) => s.addEventListener("click", this.modalHandler, false));
+
       resolve();
     });
   };
@@ -65,5 +74,14 @@ export default class Home {
   };
   stopSlider = () => {
     clearInterval(this.autoplay);
+  };
+  modalHandler = async (e) => {
+    e.preventDefault();
+    if (e.currentTarget.getAttribute("data-puppy-modal")) {
+      const id = e.currentTarget.getAttribute("data-puppy-modal");
+      const puppy = await getJson(`/api/puppy/${id}`);
+      this.modalContentEl.innerHTML = renderModal(puppy);
+      this.modal.show();
+    }
   };
 }
