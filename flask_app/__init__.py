@@ -1,7 +1,7 @@
 import os
 import logging
 from flask_compress import Compress
-from flask import Flask, render_template
+from flask import Flask
 from flask_app.helpers import page_not_found, add_security_headers
 from flask_app.routes.views import views
 from flask_app.routes.api import api

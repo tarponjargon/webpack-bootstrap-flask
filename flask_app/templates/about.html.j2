@@ -17,12 +17,26 @@
             </div>
           </div>
           <div class="row mt-4">
-              <div class="col-lg-4 ms-auto"><p class="lead">This is a demo site illustrates a webpack-bootstrap-flask tech stack.  It uses the PetFinder server-to-server API as its data source. Notably, this does not use a client-side framework like</p></div>
-              <div class="col-lg-4 me-auto"><p class="lead">Vue or React, just vanilla JS.  It could relatively easily, but I created it to demonstrate how to use webpack with a "traditional" server-side-rendered website.</p></div>
+              <div class="col-lg-4 ms-auto">
+                  <p class="lead">
+                    This is a demo site illustrates a webpack-bootstrap-flask tech stack.
+                    There is no front-end framework (React, Vue) used, though you could add one easily.  Instead, I created it to illustrate how
+                    to architect, develop and code-split front-end code (using webpack and bootrap) for a "traditional" server-side-rendered website (using flask).
+                  </p>
+              </div>
+              <div class="col-lg-4 me-auto">
+                <p class="lead">
+                  For more information, see the <a class="text-white" href="https://github.com/tarponjargon/webpack-bootstrap-flask">repo on GitHub</a>.
+                  For portability I did not use a database.  The data source for the site is the server-to-server
+                  <a class="text-white" href="https://www.petfinder.com/developers/v2/docs/">PetFinder API</a>, so it does load a tad slower because
+                  every request spawns a subsequent http request to PetFinder from the flask instance.
+                  But hey, you might even <a class="text-white" href="/puppies">find a puppy</a>!
+                </p>
+              </div>
           </div>
           <div class="text-center mt-4">
-              <a class="btn btn-xl btn-outline-light" href="/puppies">
-                  View Puppies
+              <a class="btn btn-xl btn-outline-light" href="https://github.com/tarponjargon/webpack-bootstrap-flask">
+                  View on GitHub
                   <i class="fas fa-arrow-right me-2"></i>
               </a>
           </div>
