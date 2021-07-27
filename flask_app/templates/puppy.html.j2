@@ -7,7 +7,10 @@
 {% block content %}
 
 <section class="masthead page-section bg-white mb-0" id="{{ page }}">
-  <div class="container">
+  <div class="container position-relative">
+    <a class="detail-back text-decoration-none" href="#" onclick="window.history.go(-1); return false;">
+      <i class="fas fa-arrow-left fa-1x"></i> Back
+    </a>
     {{ render_masthead(puppy.name)}}
 
     <div class="row mt-5">

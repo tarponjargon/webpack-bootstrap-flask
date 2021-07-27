@@ -78,7 +78,7 @@ export default class Favorite {
   };
 
   toggleButton = (id) => {
-    // show the favorite button as solid if favorited (or remove)
+    // show the favorite button as solid if favorited
     const el = this.container.querySelector(`[data-favorite="${id}"] i`);
     if (el) el.classList.toggle("fw-bold");
   };

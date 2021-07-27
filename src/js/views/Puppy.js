@@ -40,7 +40,7 @@ export default class Puppy {
     // Create the main slider.
     const primarySlider = new Splide("#main-image-sync", {
       type: "fade",
-      heightRatio: 0.9,
+      heightRatio: 1.2,
       pagination: false,
       arrows: false,
       cover: true,
