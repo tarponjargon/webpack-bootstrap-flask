@@ -47,6 +47,7 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.9.2",
+    "@splidejs/splide": "^2.4.21",
     "bootstrap": "^5.0.2",
     "glider-js": "^1.7.7"
   },

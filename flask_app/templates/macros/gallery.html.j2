@@ -1,0 +1,71 @@
+{% macro render_gallery(puppy) -%}
+<div
+  id="main-image-sync"
+  class="splide js-splide-primary p-splide p-splide--primary splide--fade splide--ltr splide--draggable is-active"
+  tabindex="0"
+>
+    <div class="splide__track" id="sync-track">
+        <ul class="splide__list" id="sync-list">
+          {% for photo in puppy.photos %}
+            <li
+              class="splide__slide p-splide__slide rounded {{ 'is-active is-visible' if loop.index == 0 else ''}}"
+              aria-hidden="false"
+              tabindex="0"
+              id="sync-slide-{{loop.index}}"
+            >
+              <img
+                alt="{{ puppy.name }} Photo"
+                src="{{ puppy.photos[loop.index0].full }}"
+              >
+            </li>
+          {% endfor %}
+        </ul>
+    </div>
+</div>
+<div
+  id="thumbnail-sync"
+  class="splide js-splide-secondary p-splide p-splide--secondary splide--slide splide--ltr splide--draggable splide--nav is-active mt-4"
+  tabindex="0"
+>
+    <div class="splide__track" id="sync-thumbnail-track">
+        <ul
+          class="splide__list"
+          id="sync-thumbnail-list"
+        >
+          {% for photo in puppy.photos %}
+            <li
+              class="splide__slide p-splide__slide {{ 'is-active is-visible' if loop.index == 0 else ''}}"
+              id="sync-thumbnail-slide-{{loop.index}}"
+              aria-current="true"
+              aria-hidden="false"
+              tabindex="0"
+              role="button"
+              aria-label="Go to slide {{loop.index}}"
+              aria-controls="sync-slide-{{loop.index}}"
+            >
+              <img
+                alt="{{ puppy.name }}"
+                src="{{ puppy.photos[loop.index0].small }}"
+              >
+            </li>
+          {% endfor %}
+        </ul>
+    </div>
+    <div class="splide__arrows p-splide__arrows">
+      <button
+        class="splide__arrow p-splide__arrow splide__arrow--prev p-splide__arrow--prev"
+        aria-controls="sync-thumbnail-track"
+        aria-label="Go to last slide"
+      >
+        <span class="fas fa-chevron-left"></span>
+      </button>
+      <button
+        class="splide__arrow p-splide__arrow splide__arrow--next p-splide__arrow--next"
+        aria-controls="sync-thumbnail-track"
+        aria-label="Next slide"
+      >
+        <span class="fas fa-chevron-right"></span>
+      </button>
+  </div>
+</div>
+{%- endmacro %}
