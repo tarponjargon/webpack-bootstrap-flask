@@ -1,5 +1,6 @@
 import requests
 import time
+import copy
 from flask import current_app
 
 
@@ -52,7 +53,20 @@ class PetFinder:
     def get_puppies(self, params):
         headers = {"Authorization": "Bearer " + current_app.config["PETFINDER_AUTH"]["access_token"]}
         response = requests.get(f"{self.url}/animals", headers=headers, params=params)
-        return response.json()
+        obj = {"animals": []}
+        data = response.json()
+        # scrub PID from response
+        if data and "animals" in data:
+            for animal in data["animals"]:
+                puppy = copy.deepcopy(animal)
+                try:
+                    puppy["contact"]["address"]["address1"] = None
+                    puppy["contact"]["email"] = None
+                    puppy["contact"]["phone"] = None
+                except KeyError:
+                    pass
+                obj["animals"].append(puppy)
+        return obj
 
     @refresh_jwt.refresh_token
     def get_puppy(self, id):

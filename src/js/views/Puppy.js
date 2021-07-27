@@ -1,12 +1,22 @@
 import Splide from "@splidejs/splide";
+import Favorite from "../modules/Favorite";
+import { renderThumbnail } from "../components/Thumbnail";
+import { getJson } from "../modules/Utils";
 
 export default class Puppy {
   constructor() {
-    this.el = document.getElementById("main-image-sync");
+    this.galleryEl = document.getElementById("main-image-sync");
+    this.suggestionsEl = document.querySelector('[data-js="suggestions-container"]');
   }
 
-  init = () => {
-    if (this.el) this.startGallery();
+  init = async () => {
+    if (this.galleryEl) this.startGallery();
+    const data = await getJson(`/api/puppies`);
+    if (data && data.animals) {
+      this.renderSuggestions(data.animals);
+      this.favorite = new Favorite(this.suggestionsEl);
+      this.favorite.init();
+    }
   };
 
   startGallery = () => {
@@ -38,5 +48,15 @@ export default class Puppy {
 
     // Set the thumbnails slider as a sync target and then call mount.
     primarySlider.sync(secondarySlider).mount();
+  };
+
+  renderSuggestions = (suggestions) => {
+    const suggestionsHtml = `
+      <div class="row">
+        ${suggestions.map((p) => renderThumbnail(p)).join("")}
+      </div>
+    `;
+
+    this.suggestionsEl.innerHTML = suggestionsHtml;
   };
 }

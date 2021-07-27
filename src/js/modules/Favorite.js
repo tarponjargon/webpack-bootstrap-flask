@@ -5,17 +5,18 @@ export default class Favorite {
   // CRUD methods for puppy favorites.  petfinder doesn't allow bulk lookups, so looking up each favorite
   // by id would be a separate http request.  So I am storing the favorite json objects as an array in
   // localStorage
-  constructor() {
+  constructor(container = document) {
     this.key = "puppies";
     const ls = localStorage.getItem(this.key);
     this.puppies = ls ? JSON.parse(ls) : [];
     this.toast = new myToast();
+    this.container = container;
   }
 
   init = () => {
     return new Promise((resolve) => {
       // attach click handlers to favorite btns
-      const favoriteBtns = Array.from(document.querySelectorAll("[data-favorite]"));
+      const favoriteBtns = Array.from(this.container.querySelectorAll("[data-favorite]"));
       favoriteBtns.map((s) => s.addEventListener("click", this.favoriteHandler, false));
 
       // update default state for any previously selected favorites in view
@@ -78,7 +79,7 @@ export default class Favorite {
 
   toggleButton = (id) => {
     // show the favorite button as solid if favorited (or remove)
-    const el = document.querySelector(`[data-favorite="${id}"] i`);
+    const el = this.container.querySelector(`[data-favorite="${id}"] i`);
     if (el) el.classList.toggle("fw-bold");
   };
 
