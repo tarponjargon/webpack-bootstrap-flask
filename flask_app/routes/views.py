@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, current_app, request
 from flask_app.petfinder import PetFinder
-from flask_app.helpers import safe_param, get_qs, make_qs
+from flask_app.helpers import safe_param, get_qs, make_qs, page_not_found
 
 views = Blueprint("views", __name__)
 
@@ -62,7 +62,10 @@ def puppies():
 def puppy(id):
     petfinder = PetFinder()
     result = petfinder.get_puppy(id)
-    return render_template("puppy.html.j2", puppy=result["animal"])
+    if result and "animal" in result:
+        return render_template("puppy.html.j2", puppy=result["animal"])
+    else:
+        return page_not_found()
 
 
 @views.route("/favorites")

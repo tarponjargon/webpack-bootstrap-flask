@@ -2,7 +2,7 @@ from urllib.parse import urlparse, urlencode
 from flask import render_template, request, escape
 
 
-def page_not_found(e):
+def page_not_found(e=None):
     return render_template("404.html.j2"), 404
 
 
