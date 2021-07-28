@@ -4,7 +4,7 @@
 class Config(object):
     """config vars common to all environments"""
 
-    STORE_EMAIL = "letspetpuppies@yahoo.com"
+    STORE_EMAIL = "letspetpuppies@puppies.com"
     STORE_NAME = "Let's Pet Puppies!"
     STORE_ADDRESS1 = "1234 Puppy St"
     STORE_CITY = "Puppytown"
@@ -14,7 +14,8 @@ class Config(object):
 
     DEFAULT_IMAGE = "/assets/images/puppy.jpg"
 
-    # might need to get your own
+    # before going any further get a petfinder api key and replace
+    # the data below https://www.petfinder.com/developers/
     PETFINDER_API = "https://api.petfinder.com/v2"
     PETFINDER_API_KEY = "cOPI6mxazHTvCgQ2BZWh2grAbYo6JWJem8sY7QzXhNoOMiddlB"
     PETFINDER_API_SECRET = "1lrnjYy4v6O74Lhd2z9YIqN015DsALxpYf9FkS4M"
