@@ -13,7 +13,7 @@ export default class Puppy {
     if (this.galleryEl) this.startGallery();
     const data = await getJson(`/api/puppies`);
     if (data && data.animals) {
-      this.renderSuggestions(data.animals);
+      this.renderSuggestions(data.animals.slice(0, 4));
       this.favorite = new Favorite(this.suggestionsEl);
       this.favorite.init();
     }

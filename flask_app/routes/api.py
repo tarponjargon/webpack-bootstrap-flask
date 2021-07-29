@@ -16,9 +16,7 @@ def puppies():
         "sort": "random",
     }
     petfinder = PetFinder()
-    results = petfinder.get_puppies(params)
-    data = {"animals": results["animals"][:4]}
-    return data
+    return petfinder.get_puppies(params)
 
 
 @api.route("/puppy/<int:id>")
