@@ -19,34 +19,24 @@
       <div class="container">
 
           <div class="glider-contain text-center mb-5">
-            <div class="glider" data-js="homepage-carousel">
-              {% for puppy in features %}
-              <div class="invisible glider-slide position-relative">
-                  <a href="/puppy/{{puppy.id}}">
-                    <div class="glider-circle">
-                      <img src="{{puppy.primary_photo_cropped.medium}}" class="glider-slide-image" alt="{{puppy.name}}">
-                    </div>
-                    <span class="puppy-badge badge rounded-pill bg-danger">
-                      {{ puppy.name | truncate(22, False, '...', 0) }}
-                    </span>
-                  </a>
+            <div class="splide" data-js="homepage-carousel">
+              <div class="splide__track">
+                <ul class="splide__list">
+                  {% for puppy in features %}
+                    <li class="splide__slide">
+                      <a href="/puppy/{{puppy.id}}">
+                        <div class="splide__slide__container glider-circle">
+                          <img src="{{puppy.primary_photo_cropped.medium}}" class="glider-slide-image" alt="{{puppy.name}}">
+                        </div>
+                        <span class="puppy-badge badge rounded-pill bg-danger">
+                          {{ puppy.name | truncate(22, False, '...', 0) }}
+                        </span>
+                      </a>
+                    </li>
+                  {% endfor %}
+                </ul>
               </div>
-              {% endfor %}
             </div>
-            <button
-              aria-label="Previous"
-              class="slide-prev"
-              data-js="homepage-carousel-prev"
-            >
-              <i class="fas fa-chevron-left"></i>
-            </button>
-            <button
-              aria-label="Next"
-              class="slide-next"
-              data-js="homepage-carousel-next"
-            >
-              <i class="fas fa-chevron-right"></i>
-            </button>
           </div>
 
           {{ render_masthead(config.STORE_NAME, 'text-white')}}
