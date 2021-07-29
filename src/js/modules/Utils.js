@@ -6,3 +6,11 @@ export const getJson = async (endpoint) => {
   }
   return await response.json();
 };
+
+export const scrollToEl = (sel = "body") => {
+  const offsetTop = document.querySelector(sel).offsetTop;
+  scroll({
+    top: offsetTop,
+    behavior: "smooth",
+  });
+};

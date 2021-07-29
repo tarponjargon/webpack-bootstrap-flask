@@ -1,5 +1,6 @@
 from urllib.parse import urlparse, urlencode
 from flask import render_template, request, escape
+import re
 
 
 def page_not_found(e=None):
@@ -20,6 +21,12 @@ def safe_param(key):
     return escape(request.args.get(key))
 
 
+def safe_field(key):
+    if request.form.get(key) is None:
+        return None
+    return escape(request.form.get(key))
+
+
 def get_qs(url):
     parsed_url = urlparse(url)
     return parsed_url.query
@@ -28,3 +35,24 @@ def get_qs(url):
 def make_qs(params, exclude=None):
     clean_dict = {k: v for k, v in params.items() if k != exclude and v is not None}
     return urlencode(clean_dict)
+
+
+def validate_email(email):
+    if not email or not isinstance(email, str):
+        return False
+    email_pattern = re.compile("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")
+    if email_pattern.match(email):
+        return True
+    else:
+        return False
+
+
+def validate_phone(phone):
+    """matches us/canada"""
+    if not phone or not isinstance(phone, str):
+        return False
+    phone_pattern = re.compile("^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$")
+    if phone_pattern.match(phone):
+        return True
+    else:
+        return False
