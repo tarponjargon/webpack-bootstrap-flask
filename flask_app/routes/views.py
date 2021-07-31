@@ -19,7 +19,7 @@ def template_utils():
 @views.route("/")
 def home():
     petfinder = PetFinder()
-    data = petfinder.get_babies()
+    data = petfinder.get_features()
     babies = [
         i for i in data if "primary_photo_cropped" in i and i["primary_photo_cropped"] and i["status"] == "adoptable"
     ]  # only objects with images
@@ -42,6 +42,7 @@ def puppies():
     # modify petfinder's pagination links rather than hand-rolling
     prev_url = None
     next_url = None
+    current_app.logger.debug(results)
     try:
         prev_url = request.path + "?" + get_qs(results["pagination"]["_links"]["previous"]["href"])
     except KeyError:

@@ -1,12 +1,12 @@
 {% macro render_paging(prev_url, next_url) -%}
   {% if prev_url %}
-    <a href="{{ prev_url }}"><i class="fas fa-chevron-circle-left fa-2x me-5"></i></a>
+    <a href="{{ prev_url }}" data-test="prev"><i class="fas fa-chevron-circle-left fa-2x me-5"></i></a>
   {% else %}
     <i class="fas fa-chevron-circle-left fa-2x text-light me-5"></i>
   {% endif %}
 
   {% if next_url %}
-    <a href="{{ next_url }}"><i class="fas fa-chevron-circle-right fa-2x"></i></a>
+    <a href="{{ next_url }}" data-test="next"><i class="fas fa-chevron-circle-right fa-2x"></i></a>
   {% else %}
     <i class="fas fa-chevron-circle-right fa-2x text-light"></i>
   {% endif %}

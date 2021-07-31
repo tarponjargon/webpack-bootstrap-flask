@@ -57,6 +57,7 @@ class PetFinder:
         data = response.json()
         # scrub PID from response
         if data and "animals" in data:
+            obj["pagination"] = data["pagination"]
             for animal in data["animals"]:
                 puppy = copy.deepcopy(animal)
                 try:
@@ -83,7 +84,7 @@ class PetFinder:
         return data
 
     @refresh_jwt.refresh_token
-    def get_babies(self):
+    def get_features(self):
         params = {"type": "dog", "sort": "random", "age": "baby"}
         headers = {"Authorization": "Bearer " + current_app.config["PETFINDER_AUTH"]["access_token"]}
         response = requests.get(f"{self.url}/animals", headers=headers, params=params)
