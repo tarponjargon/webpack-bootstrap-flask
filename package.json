@@ -7,7 +7,7 @@
     "start": "npm-run-all webserver devserver",
     "devserver": "NODE_ENV=development webpack serve --mode development --config config/webpack.config.js",
     "webserver": "./virtualenv_python/bin/python ./virtualenv_python/bin/gunicorn --config ./config/gunicorn.py manage:app &",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "$(npm bin)/cypress run --spec 'cypress/integration/**/*'"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
@@ -21,6 +21,7 @@
     "config": "^3.3.6",
     "copy-webpack-plugin": "^9.0.1",
     "css-loader": "^5.2.6",
+    "cypress": "^8.1.0",
     "del": "^6.0.0",
     "eslint": "^7.28.0",
     "file-loader": "^6.2.0",
@@ -48,8 +49,7 @@
   "dependencies": {
     "@popperjs/core": "^2.9.2",
     "@splidejs/splide": "^2.4.21",
-    "bootstrap": "^5.0.2",
-    "glider-js": "^1.7.7"
+    "bootstrap": "^5.0.2"
   },
   "author": "",
   "license": "MIT"

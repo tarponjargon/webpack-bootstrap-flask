@@ -58,7 +58,7 @@ module.exports = (env, argv) => {
       proxy: {
         // forwards any request for a non-webpack asset thru to flask
         "!(/assets/*.(js|css))": {
-          target: "http://localhost:8000",
+          target: "http://localhost:5000",
           secure: false,
         },
       },

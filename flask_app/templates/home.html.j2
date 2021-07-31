@@ -23,7 +23,7 @@
               <div class="splide__track">
                 <ul class="splide__list">
                   {% for puppy in features %}
-                    <li class="splide__slide">
+                    <li class="splide__slide" data-test="slide">
                       <a href="/puppy/{{puppy.id}}">
                         <div class="splide__slide__container glider-circle">
                           <img src="{{puppy.primary_photo_cropped.medium}}" class="glider-slide-image" alt="{{puppy.name}}">
