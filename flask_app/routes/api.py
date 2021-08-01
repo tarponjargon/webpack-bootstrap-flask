@@ -7,12 +7,8 @@ api = Blueprint("api", __name__, url_prefix="/api")
 
 @api.route("/puppies")
 def puppies():
-    params = {
-        "type": "dog",
-        "sort": "random",
-    }
     petfinder = PetFinder()
-    return petfinder.get_puppies(params)
+    return petfinder.get_puppies()
 
 
 @api.route("/puppy/<int:id>")
@@ -20,6 +16,13 @@ def puppy(id):
     petfinder = PetFinder()
     result = petfinder.get_puppy(id)
     return result["animal"]
+
+
+@api.route("/randompuppy")
+def randompuppy():
+    petfinder = PetFinder()
+    puppies = petfinder.get_puppies()["animals"]
+    return next(x for x in puppies if x["photos"] and len(x["photos"]) > 3)
 
 
 @api.route("/contact", methods=["POST"])
