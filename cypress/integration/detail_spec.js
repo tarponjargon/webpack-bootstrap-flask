@@ -20,7 +20,10 @@ describe("Detail page", () => {
         });
     });
   });
-  it("Test suggestions", function () {
-    cy.get('[data-js="suggestions-container"] [data-favorite]').should("have.length", 4);
+  it("Test detail favorite", function () {
+    cy.favorite('[data-test="detail"] [data-favorite]');
+  });
+  it("Test suggestions favorite", function () {
+    cy.get('[data-js="suggestions-container"] [data-favorite]');
   });
 });

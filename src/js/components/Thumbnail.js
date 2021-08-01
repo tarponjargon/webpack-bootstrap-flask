@@ -13,7 +13,6 @@ export const renderThumbnail = (puppy) => {
         <button
           class="favorite-container"
           title="Remove from favorites :("
-          data-test="favorite-button"
         >
           <div
             class="favorite pt-1 text-danger"
