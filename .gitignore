@@ -9,3 +9,5 @@ flask_cache
 package-lock.json
 flask_app/assets
 flask_app/templates/includes/assets.inc
+cypress/screenshots
+cypress/videos
