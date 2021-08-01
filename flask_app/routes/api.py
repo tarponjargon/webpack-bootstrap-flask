@@ -32,7 +32,6 @@ def contact():
     email = safe_field("email")
     phone = safe_field("phone")
     message = safe_field("message")
-    current_app.logger.debug(request.form)
     if not name:
         r["message"] = "Please enter a name"
     elif not validate_email(email):

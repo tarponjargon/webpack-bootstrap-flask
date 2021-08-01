@@ -42,7 +42,6 @@ def puppies():
     # modify petfinder's pagination links rather than hand-rolling
     prev_url = None
     next_url = None
-    current_app.logger.debug(results)
     try:
         prev_url = request.path + "?" + get_qs(results["pagination"]["_links"]["previous"]["href"])
     except KeyError:
