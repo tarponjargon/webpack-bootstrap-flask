@@ -7,7 +7,8 @@
     "start": "npm-run-all webserver devserver",
     "devserver": "NODE_ENV=development webpack serve --mode development --config config/webpack.config.js",
     "webserver": "./virtualenv_python/bin/python ./virtualenv_python/bin/gunicorn --config ./config/gunicorn.py manage:app &",
-    "test": "$(npm bin)/cypress run --spec 'cypress/integration/**/*'"
+    "test": "$(npm bin)/cypress run --spec 'cypress/integration/**/*'",
+    "ci": "start-server-and-test start http://localhost:8080 test"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
@@ -37,6 +38,7 @@
     "postcss-loader": "^6.1.1",
     "purgecss-webpack-plugin": "^4.0.3",
     "sass-loader": "^12.1.0",
+    "start-server-and-test": "^1.13.1",
     "style-loader": "^3.0.0",
     "stylelint": "^13.13.1",
     "stylelint-webpack-plugin": "^2.1.1",
