@@ -22,6 +22,7 @@
     "copy-webpack-plugin": "^9.0.1",
     "css-loader": "^5.2.6",
     "cypress": "^8.1.0",
+    "cypress-localstorage-commands": "^1.5.0",
     "del": "^6.0.0",
     "eslint": "^7.28.0",
     "file-loader": "^6.2.0",
