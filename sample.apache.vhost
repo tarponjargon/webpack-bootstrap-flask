@@ -1,0 +1,17 @@
+<VirtualHost *:443>
+ServerName your.comain.com
+
+SSLEngine on
+SSLCertificateFile /path/to/fullchain.pem
+SSLCertificateKeyFile /path/to/privkey.pem
+
+Alias "/assets" "/home/user/flask_app/assets"
+<Directory /home/user/flask_app/assets/>
+    AllowOverride None
+    Require all granted
+</Directory>
+
+ProxyPass /assets !
+ProxyPass / "http://127.0.0.1:5000/"
+ProxyPassReverse / "http://127.0.0.1:5000/"
+</VirtualHost>

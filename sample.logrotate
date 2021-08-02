@@ -1,0 +1,13 @@
+/home/user/logs/gunicorn-* {
+    su user user
+    daily
+    rotate 10
+    compress
+    dateext
+    dateformat .%Y-%m-%d
+    notifempty
+    sharedscripts
+    postrotate
+        kill $(cat /home/user/tmp/gunicorn.pid)
+    endscript
+}
