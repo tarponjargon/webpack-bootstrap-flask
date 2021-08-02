@@ -15,7 +15,7 @@ export const renderThumbnail = (puppy) => {
           title="Remove from favorites :("
         >
           <div
-            class="favorite pt-1 text-danger"
+            class="favorite text-danger"
             data-favorite="${puppy.id}"
           >
             <i class="fas fa-heart"></i>

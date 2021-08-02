@@ -5,8 +5,11 @@ body {
 .navbar-nav {
   li.nav-item {
     a.nav-link {
+      @media (max-width: 1400px) {
+        font-size: 0.9rem;
+      }
       @media (min-width: 992px) and (max-width: 1200px) {
-        font-size: 0.8rem;
+        font-size: 0.7rem;
       }
     }
   }
