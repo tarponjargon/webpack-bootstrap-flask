@@ -30,7 +30,7 @@ class development(Config):
 class staging(Config):
     DEVELOPMENT = True
     DEBUG = True
-    STORE_URL = "http://localhost:8080"
+    STORE_URL = "https://puppies.thewhiteroom.com"
 
 
 class production(Config):
