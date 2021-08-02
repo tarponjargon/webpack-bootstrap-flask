@@ -1,0 +1,4 @@
+
+user ALL=NOPASSWD: /usr/bin/systemctl stop puppies.service
+user ALL=NOPASSWD: /usr/bin/systemctl start puppies.service
+user ALL=NOPASSWD: /usr/bin/systemctl restart puppies.service

@@ -1,4 +1,4 @@
-/home/user/logs/gunicorn-* {
+/home/user/project/logs/gunicorn-* {
     su user user
     daily
     rotate 10
@@ -8,6 +8,6 @@
     notifempty
     sharedscripts
     postrotate
-        kill $(cat /home/user/tmp/gunicorn.pid)
+        kill $(cat /home/user/project/tmp/gunicorn.pid)
     endscript
 }

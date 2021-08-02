@@ -5,8 +5,8 @@ SSLEngine on
 SSLCertificateFile /path/to/fullchain.pem
 SSLCertificateKeyFile /path/to/privkey.pem
 
-Alias "/assets" "/home/user/flask_app/assets"
-<Directory /home/user/flask_app/assets/>
+Alias "/assets" "/home/user/project/flask_app/assets"
+<Directory /home/user/project/flask_app/assets/>
     AllowOverride None
     Require all granted
 </Directory>
