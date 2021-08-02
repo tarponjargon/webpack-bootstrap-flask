@@ -25,9 +25,10 @@ const templates = path.resolve(flask_app, "templates");
 // delete prior webpack assets in the public path's /assets/ before webpack starts processing
 del.sync([path.resolve(assets, "*.(js|br|css|gif|gz|svg|json|LICENSE|txt)")]);
 
-console.log(config);
-
 module.exports = (env, argv) => {
+  console.log("ENVIRONMENT: " + process.env.ENV);
+  console.log(config);
+
   const devMode = argv.mode !== "production";
   const environment = argv.mode;
   return {
@@ -59,7 +60,7 @@ module.exports = (env, argv) => {
       proxy: {
         // forwards any request for a non-webpack asset thru to flask
         "!(/assets/*.(js|css))": {
-          target: "http://localhost:5000",
+          target: "http://localhost:" + process.env.FLASK_PORT || 5000,
           secure: false,
         },
       },
