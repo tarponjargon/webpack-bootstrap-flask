@@ -11,3 +11,9 @@ flask_app/assets
 flask_app/templates/includes/assets.inc
 cypress/screenshots
 cypress/videos
+.viminfo
+.cache
+.npm
+.pki
+.ssh
+tmp
