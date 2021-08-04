@@ -3,13 +3,12 @@
 
 # Webpack, Bootstrap, Flask
 
-This is a demo site that provides scale-able scaffolding for a webpack-bootstrap-flask stack. And also helps you find a puppy!
+This is a demo project that provides scaleable scaffolding for a webpack-bootstrap-flask website stack. And also helps you find a puppy!
 
 ![a puppy](https://puppies.thewhiteroom.com/assets/images/binx.jpg)
 
 ### [See demo](https://puppies.thewhiteroom.com/)
-For portability I did not use a database. The data source for the site is the server-to-server
-[PetFinder API](https://www.petfinder.com/developers/v2/docs/), so it does load a tad slower because every request spawns a subsequent http request to PetFinder from the back-end.
+For portability I did not use a database. Instead, the data source for the site is the server-to-server [PetFinder API](https://www.petfinder.com/developers/v2/docs/), so it does load a tad slower because every request spawns a subsequent http request to PetFinder from the back-end.
 
 I wanted to illustrate how to architect, develop and code-split vanilla Javascript application code for a "traditional" server-side-rendered website, so I didn't use a front-end lib like React or Vue (though you could add one easily with npm).  I did add some [example API routes](https://github.com/tarponjargon/webpack-bootstrap-flask/blob/master/flask_app/routes/api.py) in Flask.
 
@@ -91,7 +90,7 @@ Then go to [http://localhost:8080](http://localhost:8080) in your browser.
 ## Configuration
 As previously mentioned, the front-end and back-end apps have to be configured separately. Back-end app config variables can be specified in`config/config.py` (note separate blocks for each environment).
 
-Config variables for the front-end app are specified in `config/default.js` (vars shared across all environments), `config/development.js`, `config/staging.js`, and `config/production.js`.
+Config variables for the front-end app are specified in `config/default.js` (vars shared across all environments), `config/development.js`, `config/staging.js`, and `config/production.js`.  SCSS variables are specified in `src/scss/_variables.scss`.
 
 <a  name="testing"></a>
 ## Testing
@@ -129,3 +128,7 @@ Assuming you'll keep your project in a git repo, an example deployment action wo
     npm run build
 
 Gunicorn is configured to watch files so it should restart automatically.
+
+#Acknowledgements
+
+I modified the MIT-licensed Bootstrap [Freelancer](https://startbootstrap.com/theme/freelancer) template.
