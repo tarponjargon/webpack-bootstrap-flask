@@ -191,6 +191,7 @@ module.exports = (env, argv) => {
               /^alert/,
               /fadeIn/,
               /fadeOut/,
+              /^page-/,
             ],
             deep: [],
             greedy: [],
