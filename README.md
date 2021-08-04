@@ -1,13 +1,15 @@
 
 
 
-# Webpack, Bootstrap & Flask
+# Webpack, Bootstrap, Flask
 
 This is a demo site that provides scale-able scaffolding for a webpack-bootstrap-flask stack. And also helps you find a puppy!
 
 ![a puppy](https://puppies.thewhiteroom.com/assets/images/binx.jpg)
 
-For portability I did not use a database. The data source for the site is the server-to-server [PetFinder API](https://www.petfinder.com/developers/v2/docs/), so it does load a tad slower because every request spawns a subsequent http request to PetFinder from the back-end.
+### [See demo](https://puppies.thewhiteroom.com/)
+For portability I did not use a database. The data source for the site is the server-to-server
+[PetFinder API](https://www.petfinder.com/developers/v2/docs/), so it does load a tad slower because every request spawns a subsequent http request to PetFinder from the back-end.
 
 I wanted to illustrate how to architect, develop and code-split vanilla Javascript application code for a "traditional" server-side-rendered website, so I didn't use a front-end lib like React or Vue (though you could add one easily with npm).  I did add some [example API routes](https://github.com/tarponjargon/webpack-bootstrap-flask/blob/master/flask_app/routes/api.py) in Flask.
 
@@ -33,11 +35,15 @@ Assumes full-fledged UNIX-like system (like macOS, linux). System prerequisites:
 
 The setup of the back-end is fairly straightforward [Flask](https://flask.palletsprojects.com/en/2.0.x/) and [Gunicorn](https://gunicorn.org/), with routes and templates in the standard locations. Similarly, the front-end is in a standard "Javascript project" format, with code living in `src` and `node_modules`. However, front-end and back-end are two different web development paradigms these days, so it's helpful to describe how I am getting them to work together.
 
-*(This is where somewhat merited complaints about modern web applications being overly complex kick in :D It's not like the days when you FTP'd an HTML file to a directory and you're done)*
+*(This is where somewhat merited complaints about modern web applications being overly complex kick in :D)*
 
-When webpack builds assets, it places them in `flask_app/assets`  *and* writes `<script>` and `<link>` tags to `flask_app/templates/assets.inc`, which Flask then includes in the `<head>` of the base template. That is how Flask is "aware" of the core assets webpack builds, and can serve them in the HTML
+When webpack builds assets, it places them in `flask_app/assets`  *and* writes `<script>` and `<link>` tags to `flask_app/templates/assets.inc`, which Flask then includes in the `<head>` of the base template. That is how Flask is "aware" of the core assets webpack builds, and can serve them in the HTML.
 
-The core front-end app that webpack builds is all of the css (app.css), and all JS modules that are shared across all views of the site (app.js). So if you have a JS widget in the header (in this case "favorites"), since that appears on every view, that JS needs to be in the core application.
+example of a webpack-generated `assets.inc` file's contents:
+
+	<script defer="defer" src="/assets/app.f13cf3a4ed3464457be4.js?f13cf3a4ed3464457be4"></script><link href="/assets/app.f13cf3a4ed3464457be4.css?f13cf3a4ed3464457be4" rel="stylesheet">
+
+The core front-end app that webpack builds, is *all* of the css (app.css), and all JS modules that are shared across all views of the site (app.js). So if you have a JS widget in the header (in this case "favorites"), since that appears on every view, that JS needs to be in the core application.
 
 Also, generally speaking, each route is "controlled" with a JS module that is specific to that view. So for example `/contact` has a corresponding JS controller [`src/js/views/Contact.js`](https://github.com/tarponjargon/webpack-bootstrap-flask/blob/master/src/js/views/Contact.js) that is loaded *only* for that route and handles form submission/error handling, etc.
 
@@ -51,6 +57,7 @@ So yes, adding routes does indeed require several steps:
 3. Add a Javascript controller for the route (if necessary) to `src/js/views`
 4. Tell the Front-end application when to load the controller in [`src/js/routes.js`](https://github.com/tarponjargon/webpack-bootstrap-flask/blob/master/src/js/routes.js)
 
+It's not like the days when you'd FTP a HTML file to a server directory and you're done!
 <a  name="installation"></a>
 ## Installation
 
@@ -74,7 +81,7 @@ For the development environment, see [this file](https://github.com/tarponjargon
     mv sample.envrc .envrc
     direnv allow
 
-Now, you can start the development servers:
+Now, you can start the development servers (webpack-dev-server and Gunicorn):
 
     npm run start
 
