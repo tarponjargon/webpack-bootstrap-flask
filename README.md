@@ -7,7 +7,7 @@ This is a demo project that provides scaleable scaffolding for a webpack-bootstr
 ### [See demo](https://puppies.thewhiteroom.com/)
 Thie repo contains a demo site that is primarily a server-side application using [Flask](https://flask.palletsprojects.com/en/2.0.x/) and [Gunicorn](https://gunicorn.org/), but does have vanilla-Javascript client-side functionality facilitated by [Webpack](https://webpack.js.org/).
 
-Webpack is commonly used for client-slide applications (React, Vue, etc), and there's not much information about how it can be implemented for applications that are largely server-side. I aim to change that!
+Webpack is commonly used for client-slide applications (React, Vue, etc), and there's not much information about how it can be implemented for applications that are largely server-side.
 
 Even though this is a single repo, the front end and the back end are *two separate* applications. As such, they require separate configuration. This isn't a push-button install, you kind of have to enjoy a little configuration in your life :D
 
