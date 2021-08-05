@@ -1,22 +1,19 @@
-
-
-
 # Webpack, Bootstrap, Flask
 
-This is a demo project that provides scaleable scaffolding for a webpack-bootstrap-flask website stack. And also helps you find a puppy!
+This is a demo project that provides scaleable scaffolding for a webpack-bootstrap-flask website stack. And also helps you [find a puppy](https://puppies.thewhiteroom.com/)!
 
 ![a puppy](https://puppies.thewhiteroom.com/assets/images/binx.jpg)
 
 ### [See demo](https://puppies.thewhiteroom.com/)
+Thie repo contains a demo site that is primarily a server-side application using [Flask](https://flask.palletsprojects.com/en/2.0.x/) and [Gunicorn](https://gunicorn.org/), but does have vanilla-Javascript client-side functionality facilitated by [Webpack](https://webpack.js.org/).
+
+Webpack is commonly used for client-slide applications (React, Vue, etc), and there's not much information about how it can be implemented for applications that are largely server-side.
+
+Even though this is a single repo, the front end and the back end are *two separate* applications. As such, they require separate configuration. This isn't a push-button install, you kind of have to enjoy a little configuration in your life :D
+
 For portability I did not use a database. Instead, the data source for the site is the server-to-server [PetFinder API](https://www.petfinder.com/developers/v2/docs/), so it does load a tad slower because every request spawns a subsequent http request to PetFinder from the back-end.
 
-I wanted to illustrate how to architect, develop and code-split vanilla Javascript application code for a "traditional" server-side-rendered website, so I didn't use a front-end lib like React or Vue (though you could add one easily with npm).  I did add some [example API routes](https://github.com/tarponjargon/webpack-bootstrap-flask/blob/master/flask_app/routes/api.py) in Flask.
-
-Even though this is a single repo, the front end and the back end are *two separate* applications.
-
-As such, they require separate configuration. This isn't a push-button install, you kind of have to enjoy a little configuration in your life :D [Webpack](https://webpack.js.org/) is famous for that!
-
-Assumes full-fledged UNIX-like system (like macOS, linux). System prerequisites:
+Assumes install on UNIX-like systems (like macOS, linux).  Prerequisites:
 - python3.6+ and [virtualenv](https://docs.python-guide.org/dev/virtualenvs/)
 - git, npm, and node 14+
 -  [direnv](https://shivamarora.medium.com/a-guide-to-manage-your-environment-variables-in-a-better-way-using-direnv-2c1cd475c8e) (not strictly required but very helpful)
@@ -32,7 +29,7 @@ Assumes full-fledged UNIX-like system (like macOS, linux). System prerequisites:
 <a  name="architecture"></a>
 ## Architecture
 
-The setup of the back-end is fairly straightforward [Flask](https://flask.palletsprojects.com/en/2.0.x/) and [Gunicorn](https://gunicorn.org/), with routes and templates in the standard locations. Similarly, the front-end is in a standard "Javascript project" format, with code living in `src` and `node_modules`. However, front-end and back-end are two different web development paradigms these days, so it's helpful to describe how I am getting them to work together.
+The setup of the back-end is fairly straightforward Flask, with routes and templates in the standard locations. Similarly, the front-end is in a standard "Javascript project" format, with app code living in `src` and npm packages in `node_modules`.
 
 *(This is where somewhat merited complaints about modern web applications being overly complex kick in :D)*
 
@@ -42,9 +39,9 @@ example of a webpack-generated `assets.inc` file's contents:
 
 	<script defer="defer" src="/assets/app.f13cf3a4ed3464457be4.js?f13cf3a4ed3464457be4"></script><link href="/assets/app.f13cf3a4ed3464457be4.css?f13cf3a4ed3464457be4" rel="stylesheet">
 
-The core front-end app that webpack builds, is *all* of the css (app.css), and all JS modules that are shared across all views of the site (app.js). So if you have a JS widget in the header (in this case "favorites"), since that appears on every view, that JS needs to be in the core application.
+Webpack compiles all of the css into `app.[fingerprint].css`, and "core" JS (shared across all routes) into `app.[fingerprint].js`. So for example, if you have a JS widget in the header (this site uses "favorites"), since that appears on every view, that JS needs to be in the core application loaded for every page view.
 
-Also, generally speaking, each route is "controlled" with a JS module that is specific to that view. So for example `/contact` has a corresponding JS controller [`src/js/views/Contact.js`](https://github.com/tarponjargon/webpack-bootstrap-flask/blob/master/src/js/views/Contact.js) that is loaded *only* for that route and handles form submission/error handling, etc.
+Each route can also have its own "controller", a JS module that is specific to that view. So for example `/contact` has a corresponding JS controller [`src/js/views/Contact.js`](https://github.com/tarponjargon/webpack-bootstrap-flask/blob/master/src/js/views/Contact.js) that is loaded *only* for that route and handles form submission/error handling, etc.
 
  Webpack handles all the requisite code-splitting and module loading, but you have to specify *how* to split the code so that the browser loads the appropriate JS at the appropriate time. This is done in [`src/routes.js`](https://github.com/tarponjargon/webpack-bootstrap-flask/blob/master/src/js/routes.js).
 
@@ -88,9 +85,19 @@ Then go to [http://localhost:8080](http://localhost:8080) in your browser.
 
 <a  name="configuration"></a>
 ## Configuration
-As previously mentioned, the front-end and back-end apps have to be configured separately. Back-end app config variables can be specified in`config/config.py` (note separate blocks for each environment).
+As previously mentioned, the front-end and back-end apps have to be configured separately. Back-end app config variables can be specified in [`config/config.py`](https://github.com/tarponjargon/webpack-bootstrap-flask/blob/master/config/config.py) (note separate blocks for each environment).
 
-Config variables for the front-end app are specified in `config/default.js` (vars shared across all environments), `config/development.js`, `config/staging.js`, and `config/production.js`.  SCSS variables are specified in `src/scss/_variables.scss`.
+Gunicorn's config is in [`config/gunicorn.py`](https://github.com/tarponjargon/webpack-bootstrap-flask/blob/master/config/gunicorn.py).
+
+Webpack's (infamous) config is in [`config/webpack.config.js`](https://github.com/tarponjargon/webpack-bootstrap-flask/blob/master/config/webpack.config.js).
+
+Additional config variables for the front-end app are specified per environment:
+- [`config/default.js`](https://github.com/tarponjargon/webpack-bootstrap-flask/blob/master/config/default.js) (variables shared across all environments)
+- [`config/development.js`](https://github.com/tarponjargon/webpack-bootstrap-flask/blob/master/config/development.js)
+- [`config/staging.js`](https://github.com/tarponjargon/webpack-bootstrap-flask/blob/master/config/staging.js)
+- [`config/production.js`](https://github.com/tarponjargon/webpack-bootstrap-flask/blob/master/config/production.js)
+
+SCSS variables (to set colors, etc) are specified in [`src/scss/_variables.scss`](https://github.com/tarponjargon/webpack-bootstrap-flask/blob/master/src/scss/_variables.scss)
 
 <a  name="testing"></a>
 ## Testing
@@ -105,21 +112,22 @@ To do TDD, you can run this while your devserver is running:
 
     $(npm bin)/cypress open
 
-<a  name="deployment"></a>
 
+<a  name="deployment"></a>
 ## Deployment
 This stack is designed to be run as a non-privileged user. So, in staging/production environments, install as a regular user.
 
 While you *could* configure Gunicorn to handle all requests, you should use a primary webserver like Apache or Nginx to handle SSL and static assets.  Set up a reverse proxy for application requests to Flask/Gunicorn.
 
 [Example Apache configuration](https://github.com/tarponjargon/webpack-bootstrap-flask/blob/master/sample.apache.vhost)
+
 [Example Nginx configuration](https://github.com/tarponjargon/webpack-bootstrap-flask/blob/master/sample.nginx.conf)
 
 Staging and production environments will need a system-level start script for Flask/Gunicorn. See this [example systemd script](https://github.com/tarponjargon/webpack-bootstrap-flask/blob/master/sample.systemd.conf).
 
 It's handy for the user to be allowed to stop/start/restart. See this [example visudo entry](https://github.com/tarponjargon/webpack-bootstrap-flask/blob/master/sample.visudo).
 
-Gunicorn does not have built-in log rotation, so you'll need to set it up seprately. See this [example logrotate.d script](https://github.com/tarponjargon/webpack-bootstrap-flask/blob/master/sample.logrotate).
+Gunicorn does not have built-in log rotation, so you'll need to set it up separately. See this [example logrotate.d script](https://github.com/tarponjargon/webpack-bootstrap-flask/blob/master/sample.logrotate).
 
 Assuming you'll keep your project in a git repo, an example deployment action would be a sequence like:
 
@@ -129,6 +137,6 @@ Assuming you'll keep your project in a git repo, an example deployment action wo
 
 Gunicorn is configured to watch files so it should restart automatically.
 
-#Acknowledgements
+## Acknowledgements
 
 I modified the MIT-licensed Bootstrap [Freelancer](https://startbootstrap.com/theme/freelancer) template.
