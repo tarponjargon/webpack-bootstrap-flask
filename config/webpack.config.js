@@ -18,6 +18,8 @@ const { ifProduction, ifNotProduction } = getIfUtils(process.argv[3]);
 const root = path.resolve(__dirname, "../");
 const src = path.resolve(root, "./src");
 const flask_app = path.resolve(root, "flask_app");
+const flask_logs = path.resolve(flask_app, "logs");
+const flask_tmp = path.resolve(flask_app, "tmp");
 const assets = path.resolve(flask_app, "assets");
 const images = path.resolve(assets, "images");
 const templates = path.resolve(flask_app, "templates");
@@ -51,11 +53,11 @@ module.exports = (env, argv) => {
     },
     devServer: {
       publicPath: "/assets/",
-      //watchContentBase: true,
+      watchContentBase: true,
       watchOptions: {
-        ignored: [assets, `${templates}/**/*.inc`],
+        ignored: [assets, `${templates}/**/*.inc`, flask_logs, flask_tmp],
       },
-      hot: true,
+      //hot: true,
       //writeToDisk: true,
       proxy: {
         // forwards any request for a non-webpack asset thru to flask
