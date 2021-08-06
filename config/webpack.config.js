@@ -51,7 +51,7 @@ module.exports = (env, argv) => {
     },
     devServer: {
       publicPath: "/assets/",
-      watchContentBase: true,
+      //watchContentBase: true,
       watchOptions: {
         ignored: [assets, `${templates}/**/*.inc`],
       },
