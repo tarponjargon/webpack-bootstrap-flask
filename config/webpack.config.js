@@ -56,7 +56,7 @@ module.exports = (env, argv) => {
         ignored: [assets, `${templates}/**/*.inc`],
       },
       hot: true,
-      writeToDisk: true,
+      //writeToDisk: true,
       proxy: {
         // forwards any request for a non-webpack asset thru to flask
         "!(/assets/*.(js|css))": {
