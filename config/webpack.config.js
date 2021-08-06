@@ -53,6 +53,7 @@ module.exports = (env, argv) => {
     },
     devServer: {
       publicPath: "/assets/",
+      contentBase: flask_app,
       watchContentBase: true,
       watchOptions: {
         ignored: [assets, `${templates}/**/*.inc`, flask_logs, flask_tmp],
