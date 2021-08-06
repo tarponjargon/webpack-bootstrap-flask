@@ -1,4 +1,5 @@
 import requests
+from requests.exceptions import HTTPError
 import time
 import copy
 from flask import current_app
@@ -52,9 +53,19 @@ class PetFinder:
     @refresh_jwt.refresh_token
     def get_puppies(self, params={"type": "dog", "sort": "random"}):
         headers = {"Authorization": "Bearer " + current_app.config["PETFINDER_AUTH"]["access_token"]}
-        response = requests.get(f"{self.url}/animals", headers=headers, params=params)
         obj = {"animals": []}
-        data = response.json()
+        response = None
+        data = {}
+        try:
+            response = requests.get(f"{self.url}/animals", headers=headers, params=params)
+            response.raise_for_status()
+        except HTTPError as http_err:
+            current_app.logger.error(http_err)
+        except Exception as err:
+            current_app.logger.error(err)
+        else:
+            data = response.json()
+
         # scrub PID from response
         if data and "animals" in data:
             obj["pagination"] = data["pagination"]
@@ -72,8 +83,18 @@ class PetFinder:
     @refresh_jwt.refresh_token
     def get_puppy(self, id):
         headers = {"Authorization": "Bearer " + current_app.config["PETFINDER_AUTH"]["access_token"]}
-        response = requests.get(f"{self.url}/animals/{id}", headers=headers)
-        data = response.json()
+        response = None
+        data = {}
+        try:
+            response = requests.get(f"{self.url}/animals/{id}", headers=headers)
+            response.raise_for_status()
+        except HTTPError as http_err:
+            current_app.logger.error(http_err)
+        except Exception as err:
+            current_app.logger.error(err)
+        else:
+            data = response.json()
+
         # scrub PID from response
         try:
             data["animal"]["contact"]["address"]["address1"] = None
@@ -87,5 +108,16 @@ class PetFinder:
     def get_features(self):
         params = {"type": "dog", "sort": "random", "age": "baby"}
         headers = {"Authorization": "Bearer " + current_app.config["PETFINDER_AUTH"]["access_token"]}
-        response = requests.get(f"{self.url}/animals", headers=headers, params=params)
-        return response.json()["animals"]
+        animals = []
+        response = None
+        try:
+            response = requests.get(f"{self.url}/animals", headers=headers, params=params)
+            response.raise_for_status()
+        except HTTPError as http_err:
+            current_app.logger.error(http_err)
+        except Exception as err:
+            current_app.logger.error(err)
+        else:
+            animals = response.json()["animals"]
+
+        return animals

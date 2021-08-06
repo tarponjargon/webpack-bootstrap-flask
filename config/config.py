@@ -17,8 +17,8 @@ class Config(object):
     # get a petfinder api key https://www.petfinder.com/developers/ and replace
     # the data below
     PETFINDER_API = "https://api.petfinder.com/v2"
-    PETFINDER_API_KEY = "cOPI6mxazHTvCgQ2BZWh2grAbYo6JWJem8sY7QzXhNoOMiddlB"
-    PETFINDER_API_SECRET = "1lrnjYy4v6O74Lhd2z9YIqN015DsALxpYf9FkS4M"
+    PETFINDER_API_KEY = "LnySsmsuj1B2hOl9q3Rvnpm9CHyUzO56LyqVVZnQVqjPHRPafh"
+    PETFINDER_API_SECRET = "Zr0RRL6Ot56kP2SQdzKRpX80q7kIWtiDwd61Rlfa"
 
 
 class development(Config):
