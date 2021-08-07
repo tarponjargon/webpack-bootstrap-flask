@@ -9,7 +9,7 @@
     "webserver": "./virtualenv_python/bin/python ./virtualenv_python/bin/gunicorn --config ./config/gunicorn.py manage:app &",
     "build": "webpack --mode production --config config/webpack.config.js",
     "test": "$(npm bin)/cypress run --spec 'cypress/integration/**/*'",
-    "ci": "start-server-and-test start http://localhost:8080 test && kill $(cat tmp/gunicorn.pid)"
+    "ci": "start-server-and-test start ${DEV_URL} test && kill $(cat tmp/gunicorn.pid)"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",

@@ -1,8 +1,8 @@
-""" flask app configuration """
+import os
 
 
 class Config(object):
-    """config vars common to all environments"""
+    """config vars common to all Flask app environments"""
 
     STORE_EMAIL = "letspetpuppies@puppies.com"
     STORE_NAME = "Let's Pet Puppies!"
@@ -24,7 +24,7 @@ class Config(object):
 class development(Config):
     DEVELOPMENT = True
     DEBUG = True
-    STORE_URL = "http://localhost:8080"
+    STORE_URL = f"{os.environ.get('DEV_URL') or 'http://localhost:8080'}"
 
 
 class staging(Config):
@@ -36,4 +36,4 @@ class staging(Config):
 class production(Config):
     DEVELOPMENT = True
     DEBUG = True
-    STORE_URL = "http://localhost:8080"
+    STORE_URL = "https://puppies.production-url.com"

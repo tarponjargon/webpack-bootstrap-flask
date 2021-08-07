@@ -23,9 +23,11 @@ const flask_tmp = path.resolve(root, "tmp");
 const assets = path.resolve(flask_app, "assets");
 const images = path.resolve(assets, "images");
 const templates = path.resolve(flask_app, "templates");
+const includes = path.resolve(templates, "includes");
 
 // delete prior webpack assets in the public path's /assets/ before webpack starts processing
 del.sync([path.resolve(assets, "*.(js|br|css|gif|gz|svg|json|LICENSE|txt)")]);
+del.sync([path.resolve(includes, "assets.inc")]);
 
 module.exports = (env, argv) => {
   console.log("ENVIRONMENT: " + process.env.ENV);
@@ -59,11 +61,12 @@ module.exports = (env, argv) => {
         ignored: [assets, `${templates}/**/*.inc`, flask_logs, flask_tmp],
       },
       //hot: true,
-      //writeToDisk: true,
+      writeToDisk: true,
       proxy: {
         // forwards any request for a non-webpack asset thru to flask
         "!(/assets/*.(js|css))": {
-          target: "http://localhost:" + process.env.FLASK_PORT || 5000,
+          target:
+            `http://${process.env.LOCALDOMAIN || "localhost"}:` + process.env.FLASK_PORT || 5000,
           secure: false,
         },
       },
