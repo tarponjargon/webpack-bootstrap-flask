@@ -102,6 +102,8 @@ Additional config variables for the front-end app are specified per environment:
 
 SCSS variables (to set colors, etc) are specified in [`src/scss/_variables.scss`](https://github.com/tarponjargon/webpack-bootstrap-flask/blob/master/src/scss/_variables.scss)
 
+They don't call it a "stack" for nuthin'!
+
 <a  name="testing"></a>
 ## Testing
 There is a [Cypress](https://www.cypress.io/) end-to-end test suite for the demo project in `cypress/integration`. If the server is running, you can the tests with:
