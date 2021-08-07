@@ -6,7 +6,7 @@ Provides scaleable scaffolding for a webpack-bootstrap-flask website stack. And 
 ![a puppy](https://puppies.thewhiteroom.com/assets/images/binx.jpg)
 
 ### [See demo](https://puppies.thewhiteroom.com/)
-Thie repo contains a demo site that is primarily a server-side application using [Flask 2](https://flask.palletsprojects.com/en/2.0.x/) and [Gunicorn](https://gunicorn.org/), but does have vanilla-Javascript client-side functionality facilitated by [Webpack 5](https://webpack.js.org/).  It uses [Bootstrap 5-flavored](https://getbootstrap.com/docs/5.0/getting-started/introduction/) HTML/CSS/Javascript widgets.
+This is primarily a server-side application using [Flask 2](https://flask.palletsprojects.com/en/2.0.x/) and [Gunicorn](https://gunicorn.org/), but does have vanilla-Javascript client-side functionality facilitated by [Webpack 5](https://webpack.js.org/).  It uses [Bootstrap 5-flavored](https://getbootstrap.com/docs/5.0/getting-started/introduction/) HTML/CSS/Javascript widgets.
 
 Webpack is commonly used for client-slide applications, and there's not much information about how it can be implemented for applications that are largely server-side. I aim to change that!
 
@@ -32,15 +32,15 @@ Assumes install on UNIX-like systems (like macOS, linux).  Prerequisites:
 <a  name="architecture"></a>
 ## Architecture
 
-The setup of the back-end is fairly straightforward Flask living in [`flask_app`](https://github.com/tarponjargon/webpack-bootstrap-flask/tree/master/flask_app), with routes and templates in the standard locations. Similarly, the front-end is in a standard "Javascript project" format, with app code living in `src` and npm packages in `node_modules`.
+The setup of the back-end is fairly straightforward Flask living in [`flask_app`](https://github.com/tarponjargon/webpack-bootstrap-flask/tree/master/flask_app), with routes and templates in the standard locations. Similarly, the front-end is in a standard "Javascript project" format, with app code living in [`src`](https://github.com/tarponjargon/webpack-bootstrap-flask/tree/master/src) and npm packages in `node_modules`.
 
 *(This is where somewhat merited complaints about modern web applications being overly complex kick in :D)*
 
-When webpack builds assets, it outputted files them in `flask_app/assets` *rather than* the traditional `dist` (directory and contents are automatically created).
+When webpack builds assets, it outputted files them in `flask_app/assets` *rather than* the traditional `dist`.  That directory and contents are automatically created.
 
 [HTMLWebpackPlugin](https://webpack.js.org/plugins/html-webpack-plugin/) uses the template [`src/assets.inc`](https://github.com/tarponjargon/webpack-bootstrap-flask/blob/master/src/assets.inc) to generate and output `flask_app/templates/assets.inc`, which contains `<script>` and `<link>` tags pointing to the outputted webpack assets.  Flask then includes in the `<head>` of the base template. That is how Flask is "aware" of the core assets webpack builds, and can serve them in the HTML.
 
-example of a webpack-generated `assets.inc` file's contents:
+Example of a webpack-generated `assets.inc` file's contents:
 
 	<script defer="defer" src="/assets/app.f13cf3a4ed3464457be4.js?f13cf3a4ed3464457be4"></script><link href="/assets/app.f13cf3a4ed3464457be4.css?f13cf3a4ed3464457be4" rel="stylesheet">
 
@@ -62,7 +62,7 @@ The "cost" of this setup is that there are several steps to creating routes:
 3. Add a Javascript controller for the route (if desired) to [`src/js/views`](https://github.com/tarponjargon/webpack-bootstrap-flask/tree/master/src/js/views)
 4. Tell the Front-end application when to load the controller in [`src/js/routes.js`](https://github.com/tarponjargon/webpack-bootstrap-flask/blob/master/src/js/routes.js)
 
-It's not like the days when you'd FTP files to server directories and you're done.
+It's not like the old days when you'd FTP files to server directories and you're done.
 <a  name="installation"></a>
 ## Installation
 
@@ -94,9 +94,11 @@ Then go to [http://localhost:8080](http://localhost:8080) in your browser.
 
 <a  name="configuration"></a>
 ## Configuration
-As previously mentioned, the front-end and back-end apps have to be configured separately. Back-end (Flask) app config variables can be specified in [`config/config.py`](https://github.com/tarponjargon/webpack-bootstrap-flask/blob/master/config/config.py) (note separate blocks for each environment).
+The front-end and back-end apps have to be configured separately.
 
-Gunicorn's config is in [`config/gunicorn.py`](https://github.com/tarponjargon/webpack-bootstrap-flask/blob/master/config/gunicorn.py), though I tried to minimize the need to touch this file directly by leaning on varaibles set in the environment [`.envrc`](https://github.com/tarponjargon/webpack-bootstrap-flask/blob/master/sample.envrc)
+Back-end (Flask) app config variables can be specified in [`config/config.py`](https://github.com/tarponjargon/webpack-bootstrap-flask/blob/master/config/config.py) (note separate blocks for each environment).  IN it you can store keys/secrets, python/Flask module configuration variables, or variables like phone number that you want to be able to access app-wide.
+
+Gunicorn's config is in [`config/gunicorn.py`](https://github.com/tarponjargon/webpack-bootstrap-flask/blob/master/config/gunicorn.py), though I tried to minimize the need to touch this file directly by leaning on varaibles set in the environment [`.envrc`](https://github.com/tarponjargon/webpack-bootstrap-flask/blob/master/sample.envrc).
 
 Webpack's (infamous) config is in [`config/webpack.config.js`](https://github.com/tarponjargon/webpack-bootstrap-flask/blob/master/config/webpack.config.js).
 
