@@ -1,4 +1,4 @@
-/home/user/project/logs/gunicorn-* {
+/home/user/project/logs/gunicorn-*.log {
     su user user
     daily
     rotate 10
