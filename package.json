@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm-run-all webserver devserver",
     "devserver": "webpack serve --mode development --config config/webpack.config.js",
-    "webserver": "./virtualenv_python/bin/python ./virtualenv_python/bin/gunicorn --config ./config/gunicorn.py manage:app &",
+    "webserver": "${VENV_DIR}/bin/python ${VENV_DIR}/bin/gunicorn --config ./config/gunicorn.py manage:app &",
     "build": "webpack --mode production --config config/webpack.config.js",
     "test": "$(npm bin)/cypress run --spec 'cypress/integration/**/*'",
     "ci": "start-server-and-test start ${DEV_URL} test && kill $(cat tmp/gunicorn.pid)"

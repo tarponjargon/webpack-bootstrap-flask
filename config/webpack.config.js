@@ -54,6 +54,7 @@ module.exports = (env, argv) => {
       extensions: ["*", ".js"],
     },
     devServer: {
+      host: process.env.LOCALDOMAIN,
       publicPath: "/assets/",
       contentBase: flask_app,
       watchContentBase: true,
