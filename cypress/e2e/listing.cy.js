@@ -11,7 +11,7 @@ describe("Listing page", () => {
   });
   it("Test state filter", function () {
     // add filter
-    cy.get('select[name="location"]').select("Alabama");
+    cy.get('select[name="location"]').select("Alabama", { force: true });
     cy.url().should("contain", "location=AL");
     cy.get('[data-test-state="AL"]').should("have.length", 20);
 

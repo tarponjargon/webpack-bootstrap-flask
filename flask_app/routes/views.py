@@ -1,3 +1,4 @@
+import html
 from flask import Blueprint, render_template, current_app, request
 from flask_app.petfinder import PetFinder
 from flask_app.helpers import safe_param, get_qs, make_qs, page_not_found
@@ -61,6 +62,9 @@ def puppy(id):
     petfinder = PetFinder()
     result = petfinder.get_puppy(id)
     if result and "animal" in result:
+        # petfinder sends entities back in the description
+        if "description" in result["animal"] and isinstance(result["animal"]["description"], str):
+            result["animal"]["description"] = html.unescape(result["animal"]["description"])
         return render_template("puppy.html.j2", puppy=result["animal"])
     else:
         return page_not_found()

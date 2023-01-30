@@ -8,7 +8,7 @@ const glob = require("glob-all");
 //const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const TerserPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const PurgecssPlugin = require("purgecss-webpack-plugin");
+const { PurgeCSSPlugin } = require("purgecss-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { getIfUtils, removeEmpty } = require("webpack-config-utils");
@@ -54,21 +54,47 @@ module.exports = (env, argv) => {
       extensions: ["*", ".js"],
     },
     devServer: {
-      host: process.env.LOCALDOMAIN,
-      publicPath: "/assets/",
-      contentBase: flask_app,
-      watchContentBase: true,
-      watchOptions: {
-        ignored: [assets, `${templates}/**/*.inc`, flask_logs, flask_tmp],
+      // host: process.env.LOCALDOMAIN,
+      // publicPath: "/assets/",
+      // contentBase: flask_app,
+      // watchContentBase: true,
+      // watchOptions: {
+      //   ignored: [assets, `${templates}/**/*.inc`, flask_logs, flask_tmp],
+      // },
+      // //hot: true,
+      // writeToDisk: true,
+      // proxy: {
+      //   // forwards any request for a non-webpack asset thru to flask
+      //   "!(/assets/*.(js|css))": {
+      //     target:
+      //       `http://${process.env.LOCALDOMAIN || "localhost"}:` + process.env.FLASK_PORT || 5000,
+      //     secure: false,
+      //   },
+      // },
+
+      devMiddleware: {
+        publicPath: "/assets/",
+        writeToDisk: true, // apparently HtmlWebpackPlugin doesn't actually write the assets html file if false
       },
-      //hot: true,
-      writeToDisk: true,
+      client: {
+        overlay: true,
+        progress: true,
+      },
+      static: false,
+      watchFiles: {
+        paths: [src, templates, `${flask_app}/**/*.py`],
+        options: {},
+      },
+      host: process.env.LOCALDOMAIN,
+      allowedHosts: "all",
+      hot: true,
       proxy: {
-        // forwards any request for a non-webpack asset thru to flask
         "!(/assets/*.(js|css))": {
           target:
             `http://${process.env.LOCALDOMAIN || "localhost"}:` + process.env.FLASK_PORT || 5000,
           secure: false,
+          changeOrigin: true,
+          //logLevel: "debug",
         },
       },
     },
@@ -148,15 +174,7 @@ module.exports = (env, argv) => {
           // handles any fonts in /src
           test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
           exclude: ["/images/", "/assets/images/", `${assets}/images/`], // this is because svg can be both fonts and images.  Don't process svg images as fonts
-          use: [
-            {
-              loader: "file-loader",
-              options: {
-                name: "[name].[ext]",
-                outputPath: "fonts/",
-              },
-            },
-          ],
+          type: "asset/resource",
         },
       ],
     },
@@ -178,7 +196,7 @@ module.exports = (env, argv) => {
         // analyzes the files matching the pattern, and REMOVES any css from the main css chunk that is
         // NOT used in the code.  Have to be careful with this because it can create issues where some styles
         // don't work in production.  i.e. if a style is added via javascript and it's not on the whitelist
-        new PurgecssPlugin({
+        new PurgeCSSPlugin({
           paths: glob.sync([
             "./src/**/*.{js,jsx,j2,html,handlebars,hbs,inc,vue}",
             `${templates}/**/*.{j2,html,inc,vue}`,
